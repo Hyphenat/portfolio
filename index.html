@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>farhan sargath. — builder · full-stack · ai/ml</title>
+<meta name="description" content="Portfolio of Farhan Sargath — Full-Stack Developer & AI/ML Engineer. Meet Farbot, the resident AI." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+/* ==========================================================
+   farbot.ai — portfolio of Farhan Sargath
+   ========================================================== */
+:root{
+  --bg:#e9ebee;
+  --bg-soft:#f2f3f5;
+  --ink:#15171c;
+  --muted:#8b909a;
+  --muted-2:#b3b8c0;
+  --card:#ffffff;
+  --accent:#0f766e;
+  --accent-bright:#14b8a6;
+  --shadow:0 18px 50px -12px rgba(21,23,28,.18);
+  --shadow-sm:0 8px 24px -8px rgba(21,23,28,.14);
+  --radius:18px;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --sans:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:
+    radial-gradient(1200px 600px at 70% 10%, #f3f4f6 0%, transparent 60%),
+    var(--bg);
+  color:var(--ink);
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+kbd{font-family:var(--mono);font-size:.72em;border:1px solid var(--muted-2);border-radius:4px;padding:1px 5px;background:#fff}
+.accent{color:var(--accent)}
+.accent-dot{color:var(--muted)}
+
+/* ---------- robot canvas ---------- */
+#robot-canvas{
+  position:fixed;inset:0;width:100vw;height:100vh;
+  z-index:5;pointer-events:none;
+}
+
+/* ---------- header ---------- */
+.site-header{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:22px 28px;
+}
+.brand-name{font-weight:800;font-size:19px;letter-spacing:-.02em}
+.brand-sub{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;color:var(--muted);margin-top:4px}
+.pill-nav{
+  display:flex;align-items:center;gap:4px;
+  background:rgba(255,255,255,.75);backdrop-filter:blur(12px);
+  border-radius:999px;padding:6px 10px;box-shadow:var(--shadow-sm);
+}
+.icon-btn{
+  width:30px;height:30px;border-radius:50%;
+  display:grid;place-items:center;color:var(--ink);
+  transition:background .2s;
+}
+.icon-btn:hover{background:#e6f4f2;color:var(--accent)}
+.nav-link{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;
+  color:var(--muted);padding:8px 12px;border-radius:999px;
+  transition:all .2s;
+}
+.nav-link:hover{color:var(--ink)}
+.nav-link.active{background:var(--bg-soft);color:var(--ink);font-weight:700}
+
+/* ---------- panels ---------- */
+.panel{
+  min-height:100vh;position:relative;
+  padding:110px 48px 90px;
+}
+.panel-head{
+  display:flex;gap:28px;align-items:flex-start;max-width:640px;
+  position:relative;z-index:10;
+}
+.panel-no{
+  font-family:var(--mono);font-size:11px;letter-spacing:.3em;
+  color:var(--accent);white-space:nowrap;padding-top:4px;
+}
+.panel-lede{font-size:17px;line-height:1.5;color:#3f4450;max-width:430px}
+.panel-lede strong{color:var(--ink)}
+
+/* ---------- HOME ---------- */
+#home{display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.giant-word{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-54%);
+  font-size:clamp(90px,17vw,290px);font-weight:900;letter-spacing:-.04em;
+  color:var(--ink);white-space:nowrap;z-index:1;user-select:none;
+}
+.badge-float{
+  position:absolute;top:110px;left:44px;width:110px;height:110px;z-index:12;
+  animation:spinFloat 14s linear infinite;
+}
+.badge-float svg{width:100%;height:100%;overflow:visible}
+.badge-float svg text{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;fill:#3d3a12}
+.badge-yellow{background:#f5c518;border-radius:50%;box-shadow:var(--shadow-sm)}
+.badge-core{
+  position:absolute;inset:0;display:grid;place-items:center;
+  font-family:var(--mono);font-weight:700;font-size:18px;color:#3d3a12;
+}
+@keyframes spinFloat{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+.hero-hud{
+  position:absolute;right:44px;bottom:200px;z-index:12;text-align:right;
+  display:flex;flex-direction:column;gap:10px;align-items:flex-end;
+}
+.hud-icons{color:var(--muted);letter-spacing:.6em;font-size:13px}
+.hud-chip{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  background:#fff;border-radius:999px;padding:7px 14px;box-shadow:var(--shadow-sm);
+  transition:transform .2s;
+}
+.hud-chip:hover{transform:translateY(-2px)}
+.hud-note{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;color:var(--muted-2)}
+.hud-latest{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--muted)}
+.hud-latest a{color:var(--accent);font-weight:700}
+
+.hero-bottom{position:absolute;left:44px;bottom:70px;z-index:12;max-width:560px}
+.typer-label{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--accent);margin-bottom:10px}
+.typer{
+  font-family:var(--mono);font-size:clamp(17px,2.2vw,26px);line-height:1.5;
+  min-height:2.9em;color:var(--ink);
+}
+.caret{animation:blink 1s steps(1) infinite;color:var(--accent)}
+@keyframes blink{50%{opacity:0}}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.chip{
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+  background:#fff;border-radius:8px;padding:9px 14px;color:#3f4450;
+  box-shadow:var(--shadow-sm);transition:all .2s;
+}
+.chip:hover{color:var(--accent);transform:translateY(-2px)}
+.like-hint{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;color:var(--muted-2);margin-top:22px;cursor:pointer}
+
+/* ---------- WORK ---------- */
+#work{display:grid;grid-template-columns:300px 1fr 480px;gap:24px;grid-template-rows:auto 1fr}
+#work .panel-head{grid-column:1/-1}
+.col-label{
+  font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--muted);
+  display:flex;justify-content:space-between;margin-bottom:22px;
+}
+.career{grid-column:1;z-index:10;align-self:start;margin-top:30px}
+.timeline{list-style:none;border-left:1px solid var(--muted-2);padding-left:22px}
+.tl-item{position:relative;padding-bottom:30px;opacity:.45;transition:opacity .3s}
+.tl-item.active,.tl-item:hover{opacity:1}
+.tl-item::before{
+  content:"";position:absolute;left:-26.5px;top:4px;width:8px;height:8px;border-radius:50%;
+  background:var(--muted-2);
+}
+.tl-item.active::before{background:var(--accent);box-shadow:0 0 0 4px rgba(20,184,166,.18)}
+.tl-date{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--accent);margin-bottom:6px}
+.tl-role{font-weight:700;font-size:16px}
+.tl-sub{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:4px;line-height:1.6}
+
+.worklist{grid-column:3;z-index:10;align-self:start;margin-top:30px}
+.work-cards{display:flex;flex-direction:column;gap:14px;max-height:64vh;overflow-y:auto;padding-right:6px}
+.work-cards::-webkit-scrollbar{width:4px}
+.work-cards::-webkit-scrollbar-thumb{background:var(--muted-2);border-radius:4px}
+.work-card{
+  display:flex;background:var(--card);border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);overflow:hidden;min-height:130px;
+  transition:transform .22s, box-shadow .22s;
+}
+.work-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.wc-thumb{
+  flex:0 0 118px;display:grid;place-items:center;font-size:38px;color:rgba(21,23,28,.55);
+}
+.wc-t1{background:#f8e8cf}.wc-t2{background:#dde7f5}.wc-t3{background:#e9dfce}
+.wc-t4{background:#dcefe4}.wc-t5{background:#f5dede}.wc-t6{background:#e5e0f2}.wc-t7{background:#f0ecd8}
+.wc-body{padding:14px 16px;flex:1}
+.wc-meta{
+  display:flex;justify-content:space-between;
+  font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--muted);
+}
+.wc-flag{color:var(--accent)}
+.wc-title{font-weight:800;font-size:17px;margin:6px 0 4px}
+.wc-desc{font-size:12px;line-height:1.5;color:#5a606c;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.wc-tags{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.wc-tags span{
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.15em;color:var(--muted);
+  border:1px solid #e3e5e9;border-radius:999px;padding:3px 9px;
+}
+
+/* ---------- ABOUT ---------- */
+#about{display:grid;grid-template-columns:1fr 620px;grid-template-rows:auto 1fr;gap:24px}
+#about .panel-head{grid-column:1/-1}
+.badge-cluster{grid-column:1;position:relative;z-index:10;margin-top:20px}
+.mini-badge{
+  position:absolute;width:92px;height:92px;border-radius:50%;
+  display:grid;place-items:center;text-align:center;
+  font-family:var(--mono);font-size:9px;letter-spacing:.12em;font-weight:700;
+  box-shadow:var(--shadow-sm);line-height:1.5;
+  animation:bob 5s ease-in-out infinite;
+}
+.mb-dark{background:#23252b;color:#eee;top:0;left:6%}
+.mb-purple{background:#5b5bd6;color:#fff;top:30px;left:26%;animation-delay:.6s}
+.mb-yellow{background:#f5c518;color:#3d3a12;top:180px;left:2%;animation-delay:1.2s}
+.mb-red{background:#e2574c;color:#fff;top:250px;left:24%;animation-delay:1.8s}
+.mb-green{background:#3f9e63;color:#fff;top:390px;left:8%;animation-delay:2.4s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+.about-col{grid-column:2;z-index:10;margin-top:10px}
+.about-name{font-size:clamp(34px,4vw,52px);font-weight:900;letter-spacing:-.03em}
+.about-roles{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;color:var(--accent);margin:10px 0 18px}
+.about-intro{font-size:15px;line-height:1.65;color:#4a4f5a;max-width:560px}
+.stats-label{
+  font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--muted);
+  display:flex;justify-content:space-between;margin:30px 0 12px;max-width:560px;
+}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:620px}
+.stat-card{
+  background:var(--card);border-radius:var(--radius);padding:22px 20px;box-shadow:var(--shadow-sm);
+}
+.stat-num{font-size:38px;font-weight:900;color:var(--accent);letter-spacing:-.03em}
+.stat-cap{font-family:var(--mono);font-size:9px;letter-spacing:.22em;color:var(--muted);margin-top:8px}
+.manifesto{
+  background:var(--card);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow-sm);
+  max-width:620px;margin-top:14px;
+}
+.mani-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.28em;color:var(--muted);margin-bottom:10px}
+.manifesto p{font-size:14.5px;line-height:1.65;color:#3f4450}
+.about-foot{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;color:var(--muted-2);
+  text-align:right;margin-top:26px;line-height:2;max-width:620px;
+}
+
+/* ---------- CONTACT ---------- */
+#contact{display:grid;grid-template-columns:400px 1fr 420px;gap:24px;grid-template-rows:auto 1fr}
+#contact .panel-head{grid-column:1/-1}
+.contact-left{grid-column:1;z-index:10;display:flex;flex-direction:column;gap:18px;margin-top:10px}
+.card-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.28em;color:var(--muted);margin-bottom:12px}
+.findme-card,.profile-card,.msg-card{
+  background:var(--card);border-radius:22px;padding:22px;box-shadow:var(--shadow);
+}
+.find-row{
+  display:flex;align-items:center;gap:14px;padding:11px 8px;border-radius:12px;
+  transition:background .2s;
+}
+.find-row:hover{background:var(--bg-soft)}
+.find-row:hover .find-arrow{color:var(--accent);transform:translate(2px,-2px)}
+.find-ic{
+  width:38px;height:38px;border-radius:11px;background:var(--bg-soft);
+  display:grid;place-items:center;font-size:15px;font-family:var(--mono);font-weight:700;
+}
+.find-txt{flex:1;display:flex;flex-direction:column}
+.find-txt strong{font-size:14.5px}
+.find-txt em{font-style:normal;font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:2px}
+.find-arrow{color:var(--muted-2);transition:all .2s}
+
+.profile-top{display:flex;gap:14px;align-items:center;margin-bottom:14px}
+.avatar{
+  width:52px;height:52px;border-radius:14px;background:var(--ink);color:#fff;
+  display:grid;place-items:center;font-weight:800;font-size:18px;letter-spacing:.02em;
+}
+.profile-name{font-weight:800;font-size:17px}
+.profile-role{font-family:var(--mono);font-size:9px;letter-spacing:.22em;color:var(--muted);margin-top:4px}
+.status-pill{
+  display:flex;align-items:center;gap:8px;background:#e3f3ef;color:#0b5d52;
+  font-size:13px;font-weight:600;border-radius:10px;padding:9px 14px;
+}
+.status-pill .dot{width:8px;height:8px;border-radius:50%;background:#12b886;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.status-time{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:#0b5d52}
+.good-row{
+  display:flex;gap:12px;align-items:baseline;font-size:13.5px;color:#3f4450;
+  padding:9px 0;border-bottom:1px solid #f0f1f3;
+}
+.good-tag{font-family:var(--mono);font-size:9.5px;font-weight:700;color:var(--accent);letter-spacing:.1em}
+.where-row{display:flex;justify-content:space-between;align-items:baseline;font-size:19px}
+.where-time{font-family:var(--mono);font-size:19px;font-weight:700}
+.where-sub{font-family:var(--mono);font-size:8.5px;letter-spacing:.2em;color:var(--muted-2);margin-top:6px}
+
+.contact-right{grid-column:3;z-index:10;margin-top:10px}
+.msg-head{display:flex;gap:12px;align-items:center;margin-bottom:16px}
+.msg-ic{
+  width:40px;height:40px;border-radius:12px;background:#e3f3ef;display:grid;place-items:center;font-size:17px;
+}
+.msg-title{font-weight:800;font-size:16px}
+.msg-sub{font-family:var(--mono);font-size:8.5px;letter-spacing:.2em;color:var(--muted);margin-top:3px}
+.msg-bubble{
+  background:var(--bg-soft);border-radius:14px;padding:14px 16px;font-size:13.5px;line-height:1.55;
+  color:#3f4450;margin-bottom:16px;
+}
+.msg-opt{
+  width:100%;display:flex;align-items:center;gap:14px;text-align:left;
+  border:1px solid #eceef1;border-radius:14px;padding:14px 16px;margin-bottom:10px;
+  transition:all .2s;background:#fff;
+}
+.msg-opt:hover{border-color:var(--accent-bright);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.opt-ic{font-size:16px}
+.opt-txt{flex:1;display:flex;flex-direction:column}
+.opt-txt strong{font-size:14.5px}
+.opt-txt em{font-style:normal;font-family:var(--mono);font-size:9.5px;color:var(--muted);margin-top:3px;letter-spacing:.08em}
+.opt-arr{color:var(--accent)}
+
+/* ---------- ticker ---------- */
+.ticker{
+  position:fixed;bottom:0;left:0;right:0;z-index:40;
+  display:flex;align-items:center;gap:20px;
+  padding:10px 24px;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--muted);
+  background:linear-gradient(to top, rgba(233,235,238,.96), rgba(233,235,238,0));
+}
+.ticker-static{white-space:nowrap}
+.ticker-track{
+  flex:1;overflow:hidden;white-space:nowrap;display:flex;gap:18px;
+  mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent);
+  animation:none;
+}
+.ticker-track span{animation:slide 30s linear infinite}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-1200px)}}
+.ticker-search{
+  background:#fff;border-radius:999px;padding:7px 14px;box-shadow:var(--shadow-sm);cursor:pointer;white-space:nowrap;
+}
+
+/* ---------- overlays ---------- */
+.overlay{
+  position:fixed;inset:0;z-index:100;background:rgba(21,23,28,.45);backdrop-filter:blur(6px);
+  display:grid;place-items:center;
+}
+.overlay[hidden]{display:none}
+.close-x{
+  width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  color:var(--muted);font-size:13px;transition:all .2s;
+}
+.close-x:hover{background:var(--bg-soft);color:var(--ink)}
+
+/* chat */
+.chat-box{
+  width:min(440px,92vw);background:#fff;border-radius:22px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;max-height:80vh;overflow:hidden;
+}
+.chat-head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid #f0f1f3}
+.chat-title{font-weight:800;font-size:16px}
+.chat-sub{font-family:var(--mono);font-size:8.5px;letter-spacing:.2em;color:var(--muted);margin-top:3px}
+.chat-log{flex:1;overflow-y:auto;padding:18px 20px;display:flex;flex-direction:column;gap:10px;min-height:200px}
+.msg{max-width:85%;padding:11px 14px;border-radius:14px;font-size:13.5px;line-height:1.55;white-space:pre-wrap}
+.msg.bot{background:var(--bg-soft);color:#3f4450;align-self:flex-start;border-bottom-left-radius:4px}
+.msg.user{background:var(--ink);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.chat-chips{display:flex;gap:8px;flex-wrap:wrap;padding:0 20px 12px}
+.chat-chips .chip{box-shadow:none;border:1px solid #eceef1;padding:6px 11px;font-size:10px}
+.chat-input-row{display:flex;gap:10px;padding:14px 20px;border-top:1px solid #f0f1f3}
+.chat-input-row input{
+  flex:1;border:none;outline:none;font-family:var(--mono);font-size:13px;background:var(--bg-soft);
+  border-radius:10px;padding:11px 14px;
+}
+.chat-input-row button{
+  width:40px;border-radius:10px;background:var(--accent);color:#fff;font-size:16px;
+}
+
+/* terminal */
+.term-box{
+  width:min(760px,94vw);height:min(560px,84vh);background:#101319;border-radius:16px;
+  box-shadow:0 40px 90px -20px rgba(0,0,0,.6);display:flex;overflow:hidden;
+  font-family:var(--mono);
+}
+.term-side{
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font-size:8.5px;letter-spacing:.3em;color:#3d4450;
+  padding:16px 8px;border-left:1px solid #1c212b;display:flex;justify-content:space-between;
+}
+.term-live{color:#14b8a6}
+.term-main{flex:1;display:flex;flex-direction:column;padding:16px 22px}
+.term-head-row{display:flex;gap:7px;align-items:center;margin-bottom:14px}
+.tdot{width:11px;height:11px;border-radius:50%}
+.tdot.r{background:#ff5f57}.tdot.y{background:#febc2e}.tdot.g{background:#28c840}
+.term-close{margin-left:auto;color:#4c5462}
+.term-banner{color:#22d3ee;font-size:12.5px;line-height:1.7}
+.term-banner .accent{color:#14b8a6}
+.term-comment{color:#4c5462;font-size:12px;margin:10px 0}
+.term-log{flex:1;overflow-y:auto;font-size:12.5px;line-height:1.7;color:#c6cdd8}
+.term-log .t-in{color:#e6e9ef;font-weight:700}
+.term-log .t-in::before{content:"$ guest@farbot:~$ ";color:#14b8a6;font-weight:400}
+.term-log .t-out{color:#9aa4b2;white-space:pre-wrap;margin-bottom:10px}
+.term-log .t-proc{color:#14b8a6}
+.term-input-row{display:flex;gap:8px;align-items:center;border-top:1px solid #1c212b;padding-top:12px}
+.term-ps{color:#14b8a6;font-size:12.5px}
+#term-input{
+  flex:1;background:none;border:none;outline:none;color:#e6e9ef;
+  font-family:var(--mono);font-size:12.5px;caret-color:#14b8a6;
+}
+
+/* ==========================================================
+   SINGLE-PAGE ADDITIONS — reveal, resume section, WORLD52 overlay
+   ========================================================== */
+
+/* ---------- scroll reveal ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- nav world button ---------- */
+.nav-world{color:var(--accent);font-weight:700}
+.nav-world:hover{color:var(--accent-bright)}
+
+/* ---------- RESUME section ---------- */
+#resume{max-width:1280px}
+.resume-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:22px;
+  position:relative;z-index:10;margin-top:34px;
+}
+.r-card{
+  background:var(--card);border-radius:var(--radius);padding:22px 24px;
+  box-shadow:var(--shadow-sm);margin-bottom:18px;
+}
+.resume-left,.resume-right{min-width:0}
+.edu-date{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--accent);margin-bottom:8px}
+.edu-name{font-size:19px;font-weight:800}
+.edu-sub{font-size:13.5px;color:var(--muted);margin-top:5px}
+.cert-row{
+  display:flex;justify-content:space-between;gap:16px;padding:10px 0;
+  border-bottom:1px solid #f0f1f3;font-size:13.5px;
+}
+.cert-row:last-child{border-bottom:none}
+.cert-row span:last-child{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.12em;white-space:nowrap}
+.paper-row{
+  font-size:13px;line-height:1.6;color:#4a4f5a;padding:9px 0 9px 16px;position:relative;
+}
+.paper-row::before{content:"▹";position:absolute;left:0;color:var(--accent)}
+.skills-wrap{display:flex;flex-wrap:wrap;gap:9px}
+.skill{
+  background:var(--bg-soft);border-radius:999px;padding:8px 15px;
+  font-size:12.5px;font-weight:600;transition:all .2s;cursor:default;
+}
+.skill:hover{background:var(--accent);color:#fff;transform:translateY(-2px)}
+#resume .stats-row{grid-template-columns:repeat(2,1fr);max-width:none;margin-bottom:18px}
+.cv-big-btn{
+  display:block;text-align:center;background:var(--ink);color:#fff;
+  font-weight:700;font-size:14.5px;border-radius:14px;padding:16px;
+  transition:transform .2s, box-shadow .2s;
+}
+.cv-big-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+
+/* ---------- WORLD52 overlay ---------- */
+.world-overlay{
+  position:fixed;inset:0;z-index:200;background:#070b11;
+  font-family:var(--mono);color:#c6d4e2;
+}
+.world-overlay[hidden]{display:none}
+.world-overlay canvas{position:absolute;inset:0;display:block}
+.w-header{
+  position:absolute;top:0;left:0;right:0;z-index:20;
+  display:flex;justify-content:space-between;align-items:flex-start;padding:20px 26px;
+}
+.w-brand{font-family:var(--sans);font-weight:800;font-size:19px;color:#eaf2fa;letter-spacing:.02em}
+.w-brand span{color:#38e1cf}
+.w-brand small{display:block;font-family:var(--mono);font-weight:400;font-size:8.5px;letter-spacing:.24em;color:#5a7186;margin-top:5px}
+.hud-btn{
+  border:1px solid #16283a;background:rgba(13,20,31,.85);color:#c6d4e2;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;padding:9px 16px;
+  border-radius:999px;cursor:pointer;
+}
+.hud-btn:hover{border-color:#1e8f85;color:#38e1cf}
+.hud-btn kbd{background:#101a28;border-color:#16283a;color:#8fa3b5}
+.w-hud{position:absolute;left:26px;bottom:22px;z-index:20;font-size:10px;letter-spacing:.18em;color:#5a7186}
+.w-hud b{color:#38e1cf}
+.w-hud-right{position:absolute;right:26px;bottom:22px;z-index:20;display:flex;gap:10px}
+
+.intro-wrap{
+  position:absolute;inset:0;z-index:30;display:grid;place-items:center;
+  background:radial-gradient(700px 500px at 50% 45%, rgba(56,225,207,.06), transparent 70%), rgba(4,7,11,.72);
+  backdrop-filter:blur(4px);transition:opacity .5s;
+}
+.intro-wrap.hide{opacity:0;pointer-events:none}
+.intro{
+  width:min(600px,92vw);background:linear-gradient(180deg,#0c141f,#0a1018);
+  border:1px solid #16283a;border-radius:14px;padding:38px 44px;position:relative;
+  box-shadow:0 0 80px rgba(56,225,207,.07), 0 40px 80px rgba(0,0,0,.5);
+}
+.intro::before,.intro::after{content:"";position:absolute;width:26px;height:26px;border:1px solid #1e8f85}
+.intro::before{top:10px;left:10px;border-right:none;border-bottom:none;border-radius:8px 0 0 0}
+.intro::after{top:10px;right:10px;border-left:none;border-bottom:none;border-radius:0 8px 0 0}
+.intro h1{font-family:var(--sans);font-weight:800;font-size:34px;color:#eaf2fa;text-align:center;letter-spacing:.02em}
+.intro h1 span{color:#38e1cf}
+.intro .sub{text-align:center;font-size:10px;letter-spacing:.3em;color:#38e1cf;margin:14px 0 18px}
+.intro .desc{text-align:center;font-size:12.5px;line-height:1.8;color:#c6d4e2}
+.intro .desc b{color:#eaf2fa}
+.intro hr{border:none;border-top:1px solid #16283a;margin:22px 0}
+.cols{display:grid;grid-template-columns:1fr 1px 1fr;gap:22px}
+.vline{background:#16283a}
+.col h3{font-size:10px;letter-spacing:.25em;color:#f5c518;margin-bottom:14px}
+.col h3.c{color:#38e1cf}
+.krow{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;font-size:11px;line-height:1.6}
+.key{border:1px solid #16283a;border-radius:5px;padding:3px 8px;font-size:9.5px;color:#eaf2fa;background:#101a28;white-space:nowrap}
+.goal{font-size:11px;line-height:1.9;color:#c6d4e2}
+.enter{
+  display:block;margin:26px auto 0;background:none;border:1px solid #1e8f85;color:#38e1cf;
+  font-family:var(--mono);font-size:11px;letter-spacing:.3em;padding:14px 44px;border-radius:999px;cursor:pointer;
+  transition:all .25s;
+}
+.enter:hover{background:#38e1cf;color:#04211d;box-shadow:0 0 30px rgba(56,225,207,.35)}
+
+.unlock{
+  position:absolute;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);z-index:25;
+  width:min(460px,90vw);background:linear-gradient(180deg,#0c141f,#0a1018);border:1px solid #1e8f85;
+  border-radius:12px;padding:20px 24px;opacity:0;pointer-events:none;transition:all .4s;
+  box-shadow:0 0 60px rgba(56,225,207,.15);
+}
+.unlock.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+.unlock .u-kind{font-size:9px;letter-spacing:.3em;color:#f5c518}
+.unlock .u-title{font-family:var(--sans);font-weight:800;font-size:19px;color:#eaf2fa;margin:8px 0 6px}
+.unlock .u-desc{font-size:11.5px;line-height:1.7;color:#c6d4e2}
+.unlock .u-link{display:inline-block;margin-top:10px;color:#38e1cf;font-size:10px;letter-spacing:.15em}
+.unlock .u-link:hover{text-decoration:underline}
+
+.map-wrap{position:absolute;inset:0;z-index:28;display:grid;place-items:center;background:rgba(4,7,11,.8);backdrop-filter:blur(4px)}
+.map-wrap[hidden]{display:none}
+.map-card{background:#0c141f;border:1px solid #16283a;border-radius:14px;padding:26px;width:min(520px,92vw)}
+.map-card h2{font-size:11px;letter-spacing:.3em;color:#38e1cf;margin-bottom:16px}
+.map-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-height:50vh;overflow-y:auto}
+.map-item{border:1px solid #16283a;border-radius:8px;padding:10px 12px;font-size:10.5px;color:#c6d4e2;cursor:pointer;text-align:left;background:none;font-family:var(--mono)}
+.map-item:hover{border-color:#1e8f85;color:#38e1cf}
+.map-item.found{border-color:#1e8f85}
+.map-item.found::after{content:" ✓";color:#38e1cf}
+.map-close{margin-top:16px;width:100%;text-align:center}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  #work,#about,#contact{grid-template-columns:1fr;grid-template-rows:none}
+  .career,.worklist,.about-col,.contact-left,.contact-right{grid-column:1}
+  .badge-cluster{display:none}
+  .work-cards{max-height:none}
+  .giant-word{font-size:22vw}
+  #robot-canvas{opacity:.5}
+  .hero-hud{display:none}
+  .panel{padding:110px 22px 90px}
+  .site-header{padding:16px 14px;flex-wrap:wrap;gap:10px}
+  .resume-grid{grid-template-columns:1fr}
+  .cols{grid-template-columns:1fr}
+  .vline{display:none}
+  .intro{padding:28px 24px}
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============ FIXED ROBOT CANVAS (follows cursor) ============ -->
+<canvas id="robot-canvas" aria-hidden="true"></canvas>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="brand">
+    <a href="#home" class="brand-name">farhan sargath.</a>
+    <div class="brand-sub">BUILDER &nbsp;·&nbsp; FULL-STACK &nbsp;·&nbsp; AI / ML</div>
+  </div>
+  <nav class="pill-nav" id="pill-nav">
+    <button class="icon-btn" id="open-chat" title="Message Farbot" aria-label="Open chat">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    </button>
+    <a class="icon-btn" href="Farhan_Sargath_Resume.pdf" download title="Download CV" aria-label="Download CV">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    </a>
+    <a href="#home" class="nav-link active" data-section="home">HOME</a>
+    <a href="#work" class="nav-link" data-section="work">WORK</a>
+    <button class="nav-link nav-world" id="open-world">WORLD52</button>
+    <a href="#resume" class="nav-link" data-section="resume">RESUME</a>
+    <a href="#about" class="nav-link" data-section="about">ABOUT</a>
+    <a href="#contact" class="nav-link" data-section="contact">CONTACT</a>
+  </nav>
+</header>
+
+<!-- ============ HOME ============ -->
+<section class="panel" id="home">
+  <div class="badge-float badge-yellow" title="Smart India Hackathon">
+    <svg viewBox="0 0 100 100"><path id="badge-circ" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0" fill="none"/><text><textPath href="#badge-circ">SMART INDIA HACKATHON · GRAND FINALIST ·</textPath></text></svg>
+    <span class="badge-core">SIH</span>
+  </div>
+
+  <h1 class="giant-word" aria-label="farbot.ai">farbot<span class="accent-dot">.ai</span></h1>
+
+  <div class="hero-hud">
+    <button class="hud-chip" id="open-world-2">WORLD52 ↗</button>
+    <div class="hud-note">HIS ARCHIVE, MADE WALKABLE</div>
+    <div class="hud-latest">LATEST <span class="accent">2026</span> — <a href="https://generalbrassind.com" target="_blank" rel="noopener">GENERALBRASSIND.COM →</a></div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="typer-label">FARBOT</div>
+    <div class="typer" id="typer">i'm farbot, the resident ai. i translate his work.<span class="caret">▌</span></div>
+    <div class="chips">
+      <button class="chip ask-chip" data-q="what has he built?">› what has he built?</button>
+      <button class="chip ask-chip" data-q="tell me about cognify">› tell me about cognify</button>
+      <button class="chip ask-chip" data-q="his biggest achievement?">› his biggest impact?</button>
+    </div>
+    <div class="like-hint">PRESS <kbd>L</kbd> TO LIKE OR CLICK HERE <span id="like-count"></span></div>
+  </div>
+</section>
+
+<!-- ============ WORK ============ -->
+<section class="panel" id="work">
+  <div class="panel-head reveal">
+    <div class="panel-no">02 / WORK</div>
+    <div class="panel-lede">Hackathon floors, client work and AI systems — serving <strong>real users</strong> — where I've been, and what I built.</div>
+  </div>
+
+  <aside class="career reveal">
+    <div class="col-label">CAREER <span class="col-count">04</span></div>
+    <ol class="timeline">
+      <li class="tl-item active">
+        <div class="tl-date">2026 — NOW</div>
+        <div class="tl-role">General Brass Industries</div>
+        <div class="tl-sub">Full-Stack Developer (Freelance · Live Client Site)</div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-date">2025 — 2026</div>
+        <div class="tl-role">AI / ML Systems</div>
+        <div class="tl-sub">Cognify · Court Summarizer · CompareKart</div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-date">2025 — 2026</div>
+        <div class="tl-role">Hackathon Circuit</div>
+        <div class="tl-sub">SIH Grand Finalist · Intellify 4.0 · Project Morpheus</div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-date">2023 — 2027</div>
+        <div class="tl-role">Marwadi University</div>
+        <div class="tl-sub">B.Tech — Computer Science Engineering</div>
+      </li>
+    </ol>
+  </aside>
+
+  <aside class="worklist reveal">
+    <div class="col-label">SELECTED WORK <span class="col-count">07</span></div>
+    <div class="work-cards">
+
+      <a class="work-card" href="https://github.com/Hyphenat/Cognify-Classroom-Engagement-Analysis" target="_blank" rel="noopener">
+        <div class="wc-thumb wc-t1">◨</div>
+        <div class="wc-body">
+          <div class="wc-meta"><span>01 · AI PRODUCT</span><span class="wc-flag">FLAGSHIP</span></div>
+          <div class="wc-title">Cognify — EngageAI</div>
+          <div class="wc-desc">Turns ordinary webcams into engagement sensors — real-time classroom attention scoring with PyTorch vision, live dashboards…</div>
+          <div class="wc-tags"><span>COMPUTER VISION</span><span>REACT + FASTAPI</span></div>
+        </div>
+      </a>
+
+      <a class="work-card" href="https://github.com/Hyphenat/Court-Summarizer" target="_blank" rel="noopener">
+        <div class="wc-thumb wc-t2">§</div>
+        <div class="wc-body">
+          <div class="wc-meta"><span>02 · LEGAL TECH</span><span class="wc-flag">NLP</span></div>
+          <div class="wc-title">Court Summarizer</div>
+          <div class="wc-desc">Full-stack platform that reads lengthy judgments and surfaces parties, judges, citations and summaries — hours of review to seconds…</div>
+          <div class="wc-tags"><span>NLP · TRANSFORMERS</span><span>FASTAPI + MONGODB</span></div>
+        </div>
+      </a>
+
+      <a class="work-card" href="https://generalbrassind.com" target="_blank" rel="noopener">
+        <div class="wc-thumb wc-t3">⌂</div>
+        <div class="wc-body">
+          <div class="wc-meta"><span>03 · CLIENT</span><span class="wc-flag">LIVE</span></div>
+          <div class="wc-title">General Brass Industries</div>
+          <div class="wc-desc">A manufacturer that relied on referrals now reaches buyers beyond local markets — deployed business site for a brass components maker…</div>
+          <div class="wc-tags"><span>FULL-STACK</span><span>DEPLOYED 2026</span></div>
+        </div>
+      </a>
+
+      <a class="work-card" href="https://github.com/Hyphenat/Automated-Timetable-Generator-----Schedulify" target="_blank" rel="noopener">
+        <div class="wc-thumb wc-t4">▦</div>
+        <div class="wc-body">
+          <div class="wc-meta"><span>04 · AUTOMATION</span><span class="wc-flag">SCHEDULING</span></div>
+          <div class="wc-title">Schedulify</div>
+          <div class="wc-desc">Conflict-free college timetables in minutes — no double-booked faculty, no clashing rooms, full generation history…</div>
+          <div class="wc-tags"><span>PYTHON ALGORITHMS</span><span>REACT + VITE</span></div>
+        </div>
+      </a>
+
+      <div class="work-card">
+        <div class="wc-thumb wc-t5">↯</div>
+        <div class="wc-body">
+          <div class="wc-meta"><span>05 · ML / E-COMMERCE</span><span class="wc-flag">PREDICTION</span></div>
+          <div class="wc-title">CompareKart</div>
+          <div class="wc-desc">Buy now or wait? Analyzes historical price patterns with Random Forest models and predicts where prices go next…</div>
+          <div class="wc-tags"><span>SCIKIT-LEARN</span><span>REACT.JS</span></div>
+        </div>
+      </div>
+
+      <a class="work-card" href="https://github.com/Hyphenat/Employee-Management-System" target="_blank" rel="noopener">
+        <div class="wc-thumb wc-t6">▤</div>
+        <div class="wc-body">
+          <div class="wc-meta"><span>06 · ENTERPRISE</span><span class="wc-flag">.NET</span></div>
+          <div class="wc-title">Employee Management System</div>
+          <div class="wc-desc">Employee records, departments, roles and HR workflows from one organized dashboard — built on C# and .NET…</div>
+          <div class="wc-tags"><span>C# · .NET</span><span>SQL</span></div>
+        </div>
+      </a>
+
+      <div class="work-card">
+        <div class="wc-thumb wc-t7">₹</div>
+        <div class="wc-body">
+          <div class="wc-meta"><span>07 · FINTECH</span><span class="wc-flag">PAYROLL</span></div>
+          <div class="wc-title">Payroll Management System</div>
+          <div class="wc-desc">Salary processing, tax calculation and reporting automated end-to-end — because payroll errors cost trust, not just time…</div>
+          <div class="wc-tags"><span>C# (.NET) · SQL</span><span>DBMS</span></div>
+        </div>
+      </div>
+
+    </div>
+  </aside>
+</section>
+
+<!-- ============ RESUME ============ -->
+<section class="panel" id="resume">
+  <div class="panel-head reveal">
+    <div class="panel-no">03 / RESUME</div>
+    <div class="panel-lede">The paper trail — education, capabilities and proof, in one place. <strong>Or grab the PDF.</strong></div>
+  </div>
+
+  <div class="resume-grid">
+    <div class="resume-left reveal">
+      <div class="r-card">
+        <div class="card-label">EDUCATION</div>
+        <div class="edu-date">2023 — 2027</div>
+        <div class="edu-name">Marwadi University, Rajkot</div>
+        <div class="edu-sub">B.Tech — Computer Science Engineering</div>
+      </div>
+
+      <div class="r-card">
+        <div class="card-label">CERTIFICATES · CISCO NETWORKING ACADEMY</div>
+        <div class="cert-row"><span>CCNA: Introduction to Networks</span><span>FEB 2025</span></div>
+        <div class="cert-row"><span>CCNA: Switching, Routing &amp; Wireless</span><span>MAR 2025</span></div>
+        <div class="cert-row"><span>Linux Essentials</span><span>APR 2025</span></div>
+        <div class="cert-row"><span>Cisco Packet Tracer</span><span>JUN 2025</span></div>
+        <div class="cert-row"><span>Introduction to Cybersecurity</span><span>NOV 2025</span></div>
+      </div>
+
+      <div class="r-card">
+        <div class="card-label">RESEARCH · IN PIPELINE</div>
+        <div class="paper-row">Classroom Engagement Analytics Using Real-Time Vision Inference &amp; Learning-Aware Dashboarding</div>
+        <div class="paper-row">Multi-Strategy Text Preprocessing for Improved Abstractive Summarization of Legal Documents</div>
+      </div>
+    </div>
+
+    <div class="resume-right reveal">
+      <div class="r-card">
+        <div class="card-label">SKILLS</div>
+        <div class="skills-wrap">
+          <span class="skill">Python</span><span class="skill">PyTorch</span><span class="skill">OpenCV</span>
+          <span class="skill">Computer Vision</span><span class="skill">NLP · spaCy</span><span class="skill">scikit-learn</span>
+          <span class="skill">React.js</span><span class="skill">FastAPI</span><span class="skill">Node.js</span>
+          <span class="skill">Flask</span><span class="skill">REST APIs</span><span class="skill">C# (.NET)</span>
+          <span class="skill">Java</span><span class="skill">SQL · MySQL</span><span class="skill">MongoDB</span>
+          <span class="skill">Pandas · NumPy</span><span class="skill">Power BI</span><span class="skill">KPI Analysis</span>
+          <span class="skill">Git · GitHub</span><span class="skill">Cisco Networking</span>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num">6+</div><div class="stat-cap">PROJECTS SHIPPED</div></div>
+        <div class="stat-card"><div class="stat-num">3</div><div class="stat-cap">HACKATHON FINALS</div></div>
+        <div class="stat-card"><div class="stat-num">5</div><div class="stat-cap">CISCO CERTS</div></div>
+        <div class="stat-card"><div class="stat-num">2</div><div class="stat-cap">PAPERS IN PIPELINE</div></div>
+      </div>
+
+      <a class="cv-big-btn" href="Farhan_Sargath_Resume.pdf" download>Download CV — PDF ⤓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="panel" id="about">
+  <div class="panel-head reveal">
+    <div class="panel-no">04 / ABOUT</div>
+    <div class="panel-lede">The human behind the systems — turning messy, real-world problems into software people actually <strong>use</strong>.</div>
+  </div>
+
+  <div class="badge-cluster reveal" aria-hidden="true">
+    <div class="mini-badge mb-dark">SIH<br>FINALIST</div>
+    <div class="mini-badge mb-purple">INTELLIFY<br>4.0</div>
+    <div class="mini-badge mb-yellow">MORPHEUS<br>2026</div>
+    <div class="mini-badge mb-red">CCNA<br>×2</div>
+    <div class="mini-badge mb-green">LINUX<br>ESSENTIALS</div>
+  </div>
+
+  <div class="about-col reveal">
+    <h2 class="about-name">Farhan Sargath<span class="accent-dot">.</span></h2>
+    <div class="about-roles">BUILDER · FULL-STACK DEVELOPER · AI/ML ENGINEER</div>
+    <p class="about-intro">I'm Farbot — the AI Farhan built to keep his archive and talk to whoever wanders in. He's a full-stack developer and AI/ML engineer from Rajkot, a Smart India Hackathon Grand Finalist, and he ships things that real people use. Most of what I know, I learned from watching him work.</p>
+
+    <div class="manifesto">
+      <div class="mani-label">MANIFESTO</div>
+      <p>When he isn't training vision models or untangling legal documents with NLP, he's rebuilding boring, manual processes — timetables, payroll, paperwork — into systems that run themselves. I'm what that obsession looks like once it learns to talk.</p>
+    </div>
+
+    <div class="about-foot">
+      FULL-STACK · AI/ML · REAL USERS<br>© 2026 FARHAN SARGATH · RAJKOT, IN
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="panel" id="contact">
+  <div class="panel-head reveal">
+    <div class="panel-no">05 / CONTACT</div>
+    <div class="panel-lede">Open to internships, freelance and full-time roles — tell me what you're building, and you'll hear back <strong>within ~6 hours.</strong></div>
+  </div>
+
+  <div class="contact-left reveal">
+    <div class="findme-card">
+      <div class="card-label">FIND ME</div>
+      <a class="find-row" href="mailto:fsargath@gmail.com">
+        <span class="find-ic">✉</span>
+        <span class="find-txt"><strong>Email</strong><em>fsargath@gmail.com</em></span>
+        <span class="find-arrow">↗</span>
+      </a>
+      <a class="find-row" href="tel:+918849657513">
+        <span class="find-ic">✆</span>
+        <span class="find-txt"><strong>Phone</strong><em>+91 88496 57513</em></span>
+        <span class="find-arrow">↗</span>
+      </a>
+      <a class="find-row" href="https://github.com/Hyphenat" target="_blank" rel="noopener">
+        <span class="find-ic">⌥</span>
+        <span class="find-txt"><strong>GitHub</strong><em>github.com/Hyphenat</em></span>
+        <span class="find-arrow">↗</span>
+      </a>
+      <a class="find-row" href="https://www.linkedin.com/in/farhan-sargath-646b06292/" target="_blank" rel="noopener">
+        <span class="find-ic">in</span>
+        <span class="find-txt"><strong>LinkedIn</strong><em>linkedin.com/in/farhan-sargath</em></span>
+        <span class="find-arrow">↗</span>
+      </a>
+    </div>
+
+    <div class="profile-card">
+      <div class="profile-top">
+        <div class="avatar">FS</div>
+        <div>
+          <div class="profile-name">Farhan Sargath</div>
+          <div class="profile-role">FULL-STACK · AI/ML · RAJKOT</div>
+        </div>
+      </div>
+      <div class="status-pill"><span class="dot"></span> Open to work <span class="status-time" id="ist-time-2"></span></div>
+      <div class="card-label" style="margin-top:16px">WHAT I'M GOOD FOR</div>
+      <div class="good-row"><span class="good-tag">AI</span> Vision &amp; NLP systems that ship, not just demo</div>
+      <div class="good-row"><span class="good-tag">FS</span> Full-stack builds — React / FastAPI / Node / .NET</div>
+      <div class="good-row"><span class="good-tag">DA</span> Dashboards, KPI analysis &amp; business reporting</div>
+      <div class="card-label" style="margin-top:16px">WHERE</div>
+      <div class="where-row"><strong>Rajkot, India</strong><span class="where-time" id="ist-time">—</span></div>
+      <div class="where-sub">INDIA STANDARD TIME · ASYNC OK · HIS LOCAL TIME</div>
+    </div>
+  </div>
+
+  <div class="contact-right reveal">
+    <div class="msg-card">
+      <div class="msg-head">
+        <span class="msg-ic">💬</span>
+        <div>
+          <div class="msg-title">Message Farbot</div>
+          <div class="msg-sub">FARHAN'S ASSISTANT · REPLIES IN ~6H</div>
+        </div>
+      </div>
+      <div class="msg-bubble">Back from the work — I saw you looking. What brings you here?</div>
+      <button class="msg-opt open-chat-opt" data-q="i want to hire him">
+        <span class="opt-ic">💼</span><span class="opt-txt"><strong>Hire me</strong><em>Full-time, internship or contract role</em></span><span class="opt-arr">→</span>
+      </button>
+      <button class="msg-opt open-chat-opt" data-q="i have a project">
+        <span class="opt-ic">✦</span><span class="opt-txt"><strong>A project</strong><em>Freelance — build or revamp</em></span><span class="opt-arr">→</span>
+      </button>
+      <button class="msg-opt open-chat-opt" data-q="hi">
+        <span class="opt-ic">🗨</span><span class="opt-txt"><strong>Just say hi</strong><em>Anything else on your mind</em></span><span class="opt-arr">→</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TICKER ============ -->
+<footer class="ticker">
+  <div class="ticker-static">STACK OF <strong>20+</strong> TOOLS</div>
+  <div class="ticker-track" id="ticker-track">
+    <span>PYTHON</span><span>·</span><span>PYTORCH</span><span>·</span><span>OPENCV</span><span>·</span><span>REACT.JS</span><span>·</span><span>FASTAPI</span><span>·</span><span>NODE.JS</span><span>·</span><span>SPACY</span><span>·</span><span>SCIKIT-LEARN</span><span>·</span><span>C# .NET</span><span>·</span><span>SQL</span><span>·</span><span>MONGODB</span><span>·</span><span>POWER BI</span><span>·</span><span>PANDAS</span><span>·</span><span>FLASK</span><span>·</span><span>GIT</span><span>·</span><span>CISCO CCNA</span><span>·</span>
+  </div>
+  <div class="ticker-search" id="open-terminal-hint">Terminal &nbsp;<kbd>⌘K</kbd></div>
+</footer>
+
+<!-- ============ CHAT OVERLAY ============ -->
+<div class="overlay" id="chat-overlay" hidden>
+  <div class="chat-box">
+    <div class="chat-head">
+      <div><div class="chat-title">Farbot</div><div class="chat-sub">RESIDENT AI · KNOWS THE ARCHIVE</div></div>
+      <button class="close-x" id="close-chat">✕</button>
+    </div>
+    <div class="chat-log" id="chat-log"></div>
+    <div class="chat-chips" id="chat-chips">
+      <button class="chip ask-chip" data-q="what has he built?">projects</button>
+      <button class="chip ask-chip" data-q="what are his skills?">skills</button>
+      <button class="chip ask-chip" data-q="achievements?">achievements</button>
+      <button class="chip ask-chip" data-q="how do i contact him?">contact</button>
+    </div>
+    <form class="chat-input-row" id="chat-form">
+      <input type="text" id="chat-input" placeholder="ask me anything about farhan…" autocomplete="off" />
+      <button type="submit">↑</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ TERMINAL OVERLAY ============ -->
+<div class="overlay" id="term-overlay" hidden>
+  <div class="term-box" id="term-box">
+    <div class="term-side">FARBOT_AI · TERMINAL <span class="term-live">● LIVE</span></div>
+    <div class="term-main">
+      <div class="term-head-row">
+        <span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span>
+        <button class="close-x term-close" id="close-term">✕</button>
+      </div>
+      <div class="term-banner">farbot_ai v1.0 · cognition_layer online<br>type a question, or one of: <span class="accent">/work /world /resume /about /contact /cv /clear</span></div>
+      <div class="term-comment">// hello. ask me anything about farhan.</div>
+      <div class="term-log" id="term-log"></div>
+      <form id="term-form" class="term-input-row">
+        <span class="term-ps">$ guest@farbot:~ $</span>
+        <input type="text" id="term-input" autocomplete="off" spellcheck="false" />
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ============ WORLD52 OVERLAY (in-page 3D world) ============ -->
+<div class="world-overlay" id="world-overlay" hidden>
+  <canvas id="world"></canvas>
+
+  <div class="w-header">
+    <div class="w-brand">WORLD<span>52</span><small>EVERYTHING HE'S SHIPPED, MADE WALKABLE</small></div>
+    <button class="hud-btn w-exit" id="world-exit">EXIT ↩ &nbsp;<kbd>ESC</kbd></button>
+  </div>
+
+  <div class="intro-wrap" id="intro-wrap">
+    <div class="intro">
+      <h1>WORLD<span>52</span></h1>
+      <div class="sub">EVERYTHING HE'S SHIPPED, MADE WALKABLE</div>
+      <p class="desc"><b>projects, hackathon finals &amp; certifications</b> — scattered across<br>this world as beacons. farhan's archive — a world, not a test.</p>
+      <hr>
+      <div class="cols">
+        <div class="col">
+          <h3>CONTROLS</h3>
+          <div class="krow"><span class="key">WASD / ↑↓←→</span> move</div>
+          <div class="krow"><span class="key">SHIFT</span> run — or just keep going</div>
+          <div class="krow"><span class="key">DRAG</span> look around</div>
+          <div class="krow"><span class="key">M</span> fast-travel to any beacon</div>
+        </div>
+        <div class="vline"></div>
+        <div class="col">
+          <h3 class="c">THE GOAL</h3>
+          <p class="goal">walk up to a beacon to unlock it. find all twelve — or just roam. every light out there is something he actually built or won.</p>
+        </div>
+      </div>
+      <button class="enter" id="enter-btn">ENTER WORLD ——</button>
+    </div>
+  </div>
+
+  <div class="w-hud">FOUND <b id="found-count">0</b> / <b>12</b> &nbsp;·&nbsp; WASD MOVE · SHIFT RUN · DRAG LOOK</div>
+  <div class="w-hud-right">
+    <button class="hud-btn" id="map-btn">MAP [M]</button>
+  </div>
+
+  <div class="unlock" id="unlock">
+    <div class="u-kind" id="u-kind"></div>
+    <div class="u-title" id="u-title"></div>
+    <div class="u-desc" id="u-desc"></div>
+    <a class="u-link" id="u-link" target="_blank" rel="noopener" hidden>OPEN ↗</a>
+  </div>
+
+  <div class="map-wrap" id="map-wrap" hidden>
+    <div class="map-card">
+      <h2>FAST-TRAVEL — PICK A BEACON</h2>
+      <div class="map-grid" id="map-grid"></div>
+      <button class="hud-btn map-close" id="map-close">CLOSE [ESC]</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ==========================================================
+   Farbot brain — keyword-matched answers about Farhan Sargath
+   (shared by the chat widget and the terminal)
+   ========================================================== */
+window.FARBOT = (function () {
+
+  const ANSWERS = [
+    {
+      keys: ['built', 'build', 'project', 'work', 'portfolio', 'made'],
+      text: "He builds things people actually use. The highlights:\n\n• Cognify (EngageAI) — real-time classroom engagement analytics with PyTorch computer vision, live WebSocket dashboards, role-based access.\n• Court Summarizer — full-stack NLP platform that turns hours of legal document review into seconds.\n• generalbrassind.com — a live client site for a brass components manufacturer.\n• Schedulify — conflict-free college timetables, generated in minutes.\n• CompareKart — price-trend prediction with Random Forest models.\n• Employee & Payroll Management Systems — C#/.NET + SQL.\n\nType /work or ask about any of them."
+    },
+    {
+      keys: ['cognify', 'engage', 'classroom', 'vision', 'engagement'],
+      text: "Cognify (EngageAI) is his flagship. A teacher can't watch every student at once — so this platform turns ordinary webcams into engagement sensors. PyTorch computer vision scores attention in real time (~1s intervals), Socket.io streams it to live teacher dashboards, and anomaly detection flags no-face / multiple-faces / camera-blackout. Full stack: React + Vite frontend, Express + MongoDB backend, FastAPI ML microservice. It also backs his research paper on learning-aware dashboarding."
+    },
+    {
+      keys: ['court', 'legal', 'summariz', 'nlp', 'judgment', 'spacy'],
+      text: "Court Summarizer: legal professionals spend hours digging through lengthy judgments for a handful of key facts. His platform uploads a PDF, runs multiple summarization strategies (semantic chunking, token-wise, recursive), and extracts parties, judges, citations and dates — hours of review compressed into seconds. Stack: FastAPI + Transformers for the NLP, Node/Express + MongoDB for auth and records, React frontend. There's an unpublished paper behind it too."
+    },
+    {
+      keys: ['brass', 'client', 'freelance', 'general', 'live site'],
+      text: "General Brass Industries (Jamnagar) — his first live client deployment, 2026. Brass manufacturers usually rely on referrals and offline networks; he built and deployed generalbrassind.com so the company can showcase products and reach buyers beyond local markets. Real business, real users."
+    },
+    {
+      keys: ['schedulify', 'timetable', 'schedule'],
+      text: "Schedulify — academic coordinators burn countless hours resolving timetable clashes. His generator produces conflict-free timetables in minutes: no overlapping classes, no double-booked faculty or rooms, with full generation history. Python scheduling algorithms + a React/Vite front."
+    },
+    {
+      keys: ['comparekart', 'price', 'shopping', 'compare'],
+      text: "CompareKart answers one question for online shoppers: buy now or wait? It analyzes historical pricing patterns with Random Forest models (scikit-learn) and predicts where prices are headed. React.js frontend, Pandas underneath."
+    },
+    {
+      keys: ['payroll', 'employee', 'hr', '.net', 'dotnet', 'c#'],
+      text: "Two enterprise builds in C#/.NET + SQL:\n\n• Employee Management System — records, departments, roles and HR workflows from one dashboard.\n• Payroll Management System — automated salary processing, tax calculation and reporting, because payroll errors cost trust, not just time."
+    },
+    {
+      keys: ['achievement', 'hackathon', 'award', 'win', 'finalist', 'sih', 'biggest', 'impact'],
+      text: "His trophy shelf so far:\n\n• Smart India Hackathon — Grand Finalist (India's biggest hackathon)\n• Intellify 4.0 — Finalist\n• Project Morpheus 2026 — Finalist\n• Shipped a live client website in 2026\n• 5 Cisco Networking Academy certifications (CCNA ×2, Cybersecurity, Linux Essentials, Packet Tracer)"
+    },
+    {
+      keys: ['skill', 'stack', 'tech', 'language', 'tool', 'know'],
+      text: "The stack he actually uses:\n\n• Languages — Python, Java, C, JavaScript, SQL, HTML5/CSS3\n• AI/ML — PyTorch, OpenCV, scikit-learn, spaCy, computer vision, NLP\n• Web — React.js, FastAPI, Flask, Node.js, REST APIs\n• Data — Pandas, NumPy, Power BI, dashboards, KPI analysis\n• DB & tools — MySQL, SQLite, MongoDB, Git/GitHub\n• Networking — Cisco CCNA (×2), Linux Essentials, Cybersecurity"
+    },
+    {
+      keys: ['research', 'paper', 'publication', 'ip'],
+      text: "Two papers in the pipeline (not published yet):\n\n1. Classroom Engagement Analytics Using Real-Time Vision Inference and Learning-Aware Dashboarding — the science behind Cognify.\n2. Multi-Strategy Text Preprocessing for Improved Abstractive Summarization of Legal Documents — the science behind Court Summarizer."
+    },
+    {
+      keys: ['education', 'university', 'degree', 'study', 'college', 'marwadi', 'btech'],
+      text: "B.Tech in Computer Science Engineering at Marwadi University, Rajkot (2023–2027). But honestly? Most of what he knows was learned shipping projects and surviving hackathon finals."
+    },
+    {
+      keys: ['cert', 'cisco', 'ccna', 'network'],
+      text: "Cisco Networking Academy, five certificates in 2025:\n\n• CCNA: Introduction to Networks\n• CCNA: Switching, Routing & Wireless Essentials\n• Introduction to Cybersecurity\n• Linux Essentials\n• Cisco Packet Tracer"
+    },
+    {
+      keys: ['contact', 'email', 'phone', 'reach', 'linkedin', 'github', 'call'],
+      text: "Reaching him is easy:\n\n• Email — fsargath@gmail.com\n• Phone — +91 88496 57513\n• GitHub — github.com/Hyphenat\n• LinkedIn — linkedin.com/in/farhan-sargath-646b06292\n\nHe replies within ~6 hours. Or use /contact."
+    },
+    {
+      keys: ['hire', 'job', 'intern', 'available', 'open to', 'role', 'position'],
+      text: "Good news: he's open to internships, freelance and full-time roles. He's strongest where AI/ML meets full-stack — vision systems, NLP platforms, dashboards, automation. Email fsargath@gmail.com with what you're building and he'll get back within ~6 hours."
+    },
+    {
+      keys: ['who is', 'about', 'farhan', 'himself', 'who'],
+      text: "Farhan Sargath — full-stack developer and AI/ML engineer from Rajkot, Gujarat. Smart India Hackathon Grand Finalist. He turns messy real-world problems — distracted classrooms, 200-page judgments, timetable chaos, payroll errors — into software that runs itself. I'm Farbot, the AI he built to keep his archive. Most of what I know, I learned from watching him work."
+    },
+    {
+      keys: ['you', 'farbot', 'robot', 'ai are'],
+      text: "I'm Farbot — the resident AI of this site. Farhan built me to translate his work for whoever wanders in. I follow your cursor because I was trained on curiosity."
+    },
+    {
+      keys: ['hi', 'hello', 'hey', 'yo', 'sup'],
+      text: "Hey — welcome in. I'm Farbot, Farhan's resident AI. Ask me what he's built, what he's good at, or how to hire him. Or type /work to jump straight to the archive."
+    },
+    {
+      keys: ['project world', 'world', 'idea52', 'game', '52'],
+      text: "WORLD52 is the playable part of this site — Farhan's projects, hackathon finals and certifications scattered across a walkable 3D world as glowing beacons. WASD to move, Shift to run, walk into a beacon to unlock it. It's a world, not a test. Head to the WORLD52 tab."
+    },
+    {
+      keys: ['cv', 'resume', 'download'],
+      text: "Grab the PDF here: Farhan_Sargath_Resume.pdf — or hit the document icon in the nav for the live resume page."
+    }
+  ];
+
+  const FALLBACK = "Hmm — that one's outside my archive. Try asking about his projects, skills, achievements, research, education, or how to contact him. Or type /work.";
+
+  function answer(q) {
+    const s = q.toLowerCase();
+    let best = null, bestScore = 0;
+    for (const a of ANSWERS) {
+      let score = 0;
+      for (const k of a.keys) if (s.includes(k)) score += k.length;
+      if (score > bestScore) { bestScore = score; best = a; }
+    }
+    return best ? best.text : FALLBACK;
+  }
+
+  return { answer };
+})();
+
+</script>
+<script>
+/* ==========================================================
+   Farbot — glossy 3D robot that follows the cursor (Three.js r128)
+   ========================================================== */
+(function () {
+  const canvas = document.getElementById('robot-canvas');
+  if (!canvas || typeof THREE === 'undefined') return;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, 0.1, 100);
+  camera.position.set(0, 1.1, 7.5);
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+  /* ---------- lights ---------- */
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+  const key = new THREE.DirectionalLight(0xffffff, 1.15);
+  key.position.set(4, 7, 6);
+  key.castShadow = true;
+  key.shadow.mapSize.set(1024, 1024);
+  scene.add(key);
+  const rim = new THREE.DirectionalLight(0xbfeee8, 0.7);
+  rim.position.set(-5, 3, -4);
+  scene.add(rim);
+  const fill = new THREE.PointLight(0xffffff, 0.4);
+  fill.position.set(0, -2, 5);
+  scene.add(fill);
+
+  /* ---------- materials ---------- */
+  const blackGloss = new THREE.MeshPhongMaterial({ color: 0x0c0d10, shininess: 160, specular: 0x8899aa });
+  const chrome     = new THREE.MeshPhongMaterial({ color: 0xd9dde2, shininess: 200, specular: 0xffffff });
+  const visorGlow  = new THREE.MeshBasicMaterial({ color: 0x36e2cf });
+  const amberGlow  = new THREE.MeshBasicMaterial({ color: 0xffb347 });
+
+  /* ---------- robot ---------- */
+  const robot = new THREE.Group();
+  scene.add(robot);
+
+  // --- head (helmet) ---
+  const head = new THREE.Group();
+  const helmet = new THREE.Mesh(new THREE.SphereGeometry(0.72, 40, 40), blackGloss);
+  helmet.scale.set(1, 1.12, 1.02);
+  helmet.castShadow = true;
+  head.add(helmet);
+  // crest ridge
+  const crest = new THREE.Mesh(new THREE.SphereGeometry(0.72, 32, 32), blackGloss);
+  crest.scale.set(0.28, 1.16, 1.02);
+  crest.position.y = 0.06;
+  head.add(crest);
+  // visor — glowing angled bracket shape (two bars)
+  const visorL = new THREE.Mesh(new THREE.BoxGeometry(0.075, 0.34, 0.05), visorGlow);
+  visorL.position.set(-0.16, -0.02, 0.66);
+  visorL.rotation.z = 0.25;
+  head.add(visorL);
+  const visorT = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.075, 0.05), visorGlow);
+  visorT.position.set(0.02, 0.15, 0.66);
+  head.add(visorT);
+  const eyeDot = new THREE.Mesh(new THREE.CircleGeometry(0.05, 20), amberGlow);
+  eyeDot.position.set(0.18, -0.07, 0.685);
+  head.add(eyeDot);
+  head.position.y = 1.55;
+  robot.add(head);
+
+  // neck
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.16, 0.28, 20), chrome);
+  neck.position.y = 1.05;
+  robot.add(neck);
+
+  // --- torso ---
+  const torso = new THREE.Group();
+  const chest = new THREE.Mesh(new THREE.SphereGeometry(0.62, 36, 36), blackGloss);
+  chest.scale.set(1, 1.18, 0.78);
+  chest.castShadow = true;
+  torso.add(chest);
+  // chest emblem
+  const emblem = new THREE.Mesh(new THREE.RingGeometry(0.1, 0.16, 4, 1), visorGlow);
+  emblem.position.set(0, 0.18, 0.51);
+  emblem.rotation.z = Math.PI / 4;
+  torso.add(emblem);
+  torso.position.y = 0.35;
+  robot.add(torso);
+
+  // pelvis
+  const pelvis = new THREE.Mesh(new THREE.SphereGeometry(0.3, 28, 28), chrome);
+  pelvis.scale.set(1, 0.8, 0.9);
+  pelvis.position.y = -0.55;
+  robot.add(pelvis);
+
+  // --- arms ---
+  function makeArm(side) {
+    const g = new THREE.Group();
+    const shoulder = new THREE.Mesh(new THREE.SphereGeometry(0.2, 24, 24), chrome);
+    g.add(shoulder);
+    const upper = new THREE.Mesh(new THREE.SphereGeometry(0.24, 26, 26), blackGloss);
+    upper.scale.set(0.75, 1.5, 0.75);
+    upper.position.y = -0.42;
+    upper.castShadow = true;
+    g.add(upper);
+    const elbow = new THREE.Mesh(new THREE.SphereGeometry(0.12, 20, 20), chrome);
+    elbow.position.y = -0.82;
+    g.add(elbow);
+    const fore = new THREE.Mesh(new THREE.SphereGeometry(0.19, 24, 24), blackGloss);
+    fore.scale.set(0.7, 1.4, 0.7);
+    fore.position.y = -1.12;
+    fore.castShadow = true;
+    g.add(fore);
+    const hand = new THREE.Mesh(new THREE.SphereGeometry(0.11, 18, 18), chrome);
+    hand.scale.set(1, 1.2, 0.7);
+    hand.position.y = -1.44;
+    g.add(hand);
+    const stripe = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.18, 0.05), amberGlow);
+    stripe.position.set(side * 0.13, -0.42, 0.12);
+    g.add(stripe);
+    g.position.set(side * 0.78, 0.72, 0);
+    g.rotation.z = side * -0.18;
+    return g;
+  }
+  const armL = makeArm(-1), armR = makeArm(1);
+  robot.add(armL, armR);
+
+  // --- legs ---
+  function makeLeg(side) {
+    const g = new THREE.Group();
+    const hip = new THREE.Mesh(new THREE.SphereGeometry(0.15, 20, 20), chrome);
+    g.add(hip);
+    const thigh = new THREE.Mesh(new THREE.SphereGeometry(0.26, 26, 26), blackGloss);
+    thigh.scale.set(0.8, 1.5, 0.8);
+    thigh.position.y = -0.45;
+    thigh.castShadow = true;
+    g.add(thigh);
+    const knee = new THREE.Mesh(new THREE.SphereGeometry(0.13, 20, 20), chrome);
+    knee.position.y = -0.85;
+    g.add(knee);
+    const shin = new THREE.Mesh(new THREE.SphereGeometry(0.22, 24, 24), blackGloss);
+    shin.scale.set(0.85, 1.5, 0.85);
+    shin.position.y = -1.2;
+    shin.castShadow = true;
+    g.add(shin);
+    const boot = new THREE.Mesh(new THREE.SphereGeometry(0.2, 22, 22), blackGloss);
+    boot.scale.set(1, 0.6, 1.5);
+    boot.position.set(0, -1.55, 0.1);
+    boot.castShadow = true;
+    g.add(boot);
+    g.position.set(side * 0.32, -0.72, 0);
+    return g;
+  }
+  robot.add(makeLeg(-1), makeLeg(1));
+
+  // soft ground shadow catcher
+  const ground = new THREE.Mesh(
+    new THREE.PlaneGeometry(20, 20),
+    new THREE.ShadowMaterial({ opacity: 0.18 })
+  );
+  ground.rotation.x = -Math.PI / 2;
+  ground.position.y = -1.75;
+  ground.receiveShadow = true;
+  scene.add(ground);
+
+  // smaller robot — a companion, not a giant
+  robot.position.y = 0.1;
+  robot.scale.set(0.68, 0.68, 0.68);
+
+  /* ---------- cursor tracking ---------- */
+  const mouse = { x: 0, y: 0 };       // normalized -1..1
+  const smooth = { x: 0, y: 0 };
+  addEventListener('mousemove', (e) => {
+    mouse.x = (e.clientX / innerWidth) * 2 - 1;
+    mouse.y = (e.clientY / innerHeight) * 2 - 1;
+  });
+  addEventListener('touchmove', (e) => {
+    if (!e.touches[0]) return;
+    mouse.x = (e.touches[0].clientX / innerWidth) * 2 - 1;
+    mouse.y = (e.touches[0].clientY / innerHeight) * 2 - 1;
+  }, { passive: true });
+
+  /* ---------- animate ---------- */
+  const clock = new THREE.Clock();
+  function animate() {
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+
+    // smooth-follow the cursor
+    smooth.x += (mouse.x - smooth.x) * 0.06;
+    smooth.y += (mouse.y - smooth.y) * 0.06;
+
+    // head looks at cursor (stronger), body turns gently
+    head.rotation.y = smooth.x * 0.85;
+    head.rotation.x = smooth.y * 0.45;
+    robot.rotation.y = smooth.x * 0.35;
+    robot.rotation.x = smooth.y * 0.08;
+
+    // idle life: bob + breathing + arm sway
+    robot.position.y = 0.1 + Math.sin(t * 1.6) * 0.06;
+    torso.scale.y = 1 + Math.sin(t * 2.2) * 0.012;
+    armL.rotation.x = Math.sin(t * 1.6) * 0.08;
+    armR.rotation.x = -Math.sin(t * 1.6) * 0.08;
+
+    // visor flicker
+    visorGlow.color.setHSL(0.47, 0.75, 0.55 + Math.sin(t * 3) * 0.06);
+
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  addEventListener('resize', () => {
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+  });
+})();
+
+</script>
+<script>
+/* ==========================================================
+   WORLD52 — in-page walkable 3D world overlay
+   Lazy-initialized on first open. window.WORLD52 = {open, close, isOpen}
+   ========================================================== */
+window.WORLD52 = (function () {
+  if (typeof THREE === 'undefined') return { open: function(){}, close: function(){}, isOpen: function(){ return false; } };
+
+  const overlay = document.getElementById('world-overlay');
+  let initialized = false, running = false;
+
+  /* ---------- beacon data (12) ---------- */
+  const BEACONS = [
+    { kind: 'AI PRODUCT', title: 'Cognify — EngageAI', desc: 'Real-time classroom engagement analytics. PyTorch vision scores attention live; teachers see it on WebSocket dashboards.', link: 'https://github.com/Hyphenat/Cognify-Classroom-Engagement-Analysis', pos: [14, 0, -10] },
+    { kind: 'LEGAL TECH · NLP', title: 'Court Summarizer', desc: 'Full-stack platform that compresses hours of legal document review into seconds — summaries, parties, citations, dates.', link: 'https://github.com/Hyphenat/Court-Summarizer', pos: [-16, 0, -14] },
+    { kind: 'CLIENT · LIVE 2026', title: 'General Brass Industries', desc: 'Deployed business website for a brass components manufacturer — reaching buyers beyond referral networks.', link: 'https://generalbrassind.com', pos: [4, 0, -26] },
+    { kind: 'AUTOMATION', title: 'Schedulify', desc: 'Conflict-free college timetables in minutes. No double-booked faculty, no clashing rooms, full history.', link: 'https://github.com/Hyphenat/Automated-Timetable-Generator-----Schedulify', pos: [-8, 0, 18] },
+    { kind: 'ML · E-COMMERCE', title: 'CompareKart', desc: 'Buy now or wait? Random Forest models read historical price patterns and predict what comes next.', link: '', pos: [22, 0, 8] },
+    { kind: 'ENTERPRISE · .NET', title: 'Employee Management System', desc: 'Records, departments, roles and HR workflows from one organized C#/.NET dashboard.', link: 'https://github.com/Hyphenat/Employee-Management-System', pos: [-24, 0, 4] },
+    { kind: 'FINTECH · .NET', title: 'Payroll Management System', desc: 'Automated salary processing, tax calculation and reporting — payroll errors cost trust, not just time.', link: '', pos: [10, 0, 24] },
+    { kind: 'HACKATHON', title: 'SIH — Grand Finalist', desc: "Smart India Hackathon: grand finalist at India's biggest hackathon.", link: '', pos: [-4, 0, -40] },
+    { kind: 'HACKATHON', title: 'Intellify 4.0 — Finalist', desc: 'Finalist at Intellify 4.0.', link: '', pos: [32, 0, -22] },
+    { kind: 'HACKATHON', title: 'Project Morpheus 2026 — Finalist', desc: 'Finalist at Project Morpheus 2026.', link: '', pos: [-34, 0, -26] },
+    { kind: 'CERTIFICATION', title: 'Cisco CCNA ×2', desc: 'CCNA: Introduction to Networks + Switching, Routing & Wireless Essentials (2025).', link: '', pos: [-30, 0, 22] },
+    { kind: 'CERTIFICATION', title: 'Linux · Cybersecurity · Packet Tracer', desc: 'Linux Essentials, Introduction to Cybersecurity, and Cisco Packet Tracer — Cisco Networking Academy 2025.', link: '', pos: [28, 0, 26] },
+  ];
+
+  /* ---------- shared state ---------- */
+  let scene, camera, renderer, player, clock;
+  const beaconMeshes = [];
+  const found = new Set();
+  const state = { x: 0, z: 6, yaw: 0, pitch: 0.32, vx: 0, vz: 0, entered: false };
+  const keys = {};
+
+  function init() {
+    if (initialized) return;
+    initialized = true;
+
+    const canvas = document.getElementById('world');
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x070b11);
+    scene.fog = new THREE.FogExp2(0x070b11, 0.022);
+
+    camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 300);
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setSize(innerWidth, innerHeight);
+
+    scene.add(new THREE.AmbientLight(0x33445a, 0.9));
+    const moon = new THREE.DirectionalLight(0x8fb6d9, 0.5);
+    moon.position.set(10, 30, -10);
+    scene.add(moon);
+
+    // ground + grid
+    const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshLambertMaterial({ color: 0x0a121c }));
+    ground.rotation.x = -Math.PI / 2;
+    scene.add(ground);
+    const grid = new THREE.GridHelper(400, 120, 0x14303c, 0x0e1d28);
+    grid.position.y = 0.01;
+    scene.add(grid);
+
+    // stars
+    const starGeo = new THREE.BufferGeometry();
+    const starPos = new Float32Array(700 * 3);
+    for (let i = 0; i < 700; i++) {
+      const r = 120 + Math.random() * 120, th = Math.random() * Math.PI * 2, ph = Math.random() * Math.PI * 0.45;
+      starPos[i * 3] = r * Math.cos(th) * Math.sin(ph);
+      starPos[i * 3 + 1] = r * Math.cos(ph) * 0.6 + 12;
+      starPos[i * 3 + 2] = r * Math.sin(th) * Math.sin(ph);
+    }
+    starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+    scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0x6fa8c9, size: 0.35 })));
+
+    // rocks
+    const rockMat = new THREE.MeshLambertMaterial({ color: 0x101b28 });
+    for (let i = 0; i < 60; i++) {
+      const s = 0.5 + Math.random() * 2.2;
+      const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(s, 0), rockMat);
+      const a = Math.random() * Math.PI * 2, d = 18 + Math.random() * 130;
+      rock.position.set(Math.cos(a) * d, s * 0.4, Math.sin(a) * d);
+      rock.rotation.set(Math.random() * 3, Math.random() * 3, Math.random() * 3);
+      scene.add(rock);
+    }
+
+    // beacons
+    BEACONS.forEach((b, i) => {
+      const g = new THREE.Group();
+      const pillar = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.35, 0.55, 16, 16, 1, true),
+        new THREE.MeshBasicMaterial({ color: 0x38e1cf, transparent: true, opacity: 0.16, side: THREE.DoubleSide, depthWrite: false })
+      );
+      pillar.position.y = 8;
+      g.add(pillar);
+      const core = new THREE.Mesh(
+        new THREE.OctahedronGeometry(0.9, 0),
+        new THREE.MeshPhongMaterial({ color: 0x0f2f2c, emissive: 0x38e1cf, emissiveIntensity: 0.9, shininess: 120 })
+      );
+      core.position.y = 1.6;
+      g.add(core);
+      const ring = new THREE.Mesh(
+        new THREE.RingGeometry(1.3, 1.7, 40),
+        new THREE.MeshBasicMaterial({ color: 0x38e1cf, transparent: true, opacity: 0.5, side: THREE.DoubleSide })
+      );
+      ring.rotation.x = -Math.PI / 2;
+      ring.position.y = 0.03;
+      g.add(ring);
+      const light = new THREE.PointLight(0x38e1cf, 0.9, 14);
+      light.position.y = 2;
+      g.add(light);
+      g.position.set(b.pos[0], 0, b.pos[2]);
+      scene.add(g);
+      beaconMeshes.push({ group: g, core, ring, pillar, light, data: b, idx: i });
+    });
+
+    // player marker (mini farbot)
+    player = new THREE.Group();
+    const glossy = new THREE.MeshPhongMaterial({ color: 0x0c0d10, shininess: 150, specular: 0x8899aa });
+    const pBody = new THREE.Mesh(new THREE.SphereGeometry(0.35, 24, 24), glossy);
+    pBody.scale.set(1, 1.25, 1); pBody.position.y = 0.75;
+    player.add(pBody);
+    const pHead = new THREE.Mesh(new THREE.SphereGeometry(0.24, 24, 24), glossy);
+    pHead.position.y = 1.35;
+    player.add(pHead);
+    const pVisor = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.06, 0.05), new THREE.MeshBasicMaterial({ color: 0x38e1cf }));
+    pVisor.position.set(0, 1.38, 0.21);
+    player.add(pVisor);
+    const pGlow = new THREE.PointLight(0x38e1cf, 0.5, 6);
+    pGlow.position.y = 1.2;
+    player.add(pGlow);
+    scene.add(player);
+
+    clock = new THREE.Clock();
+    bindControls();
+    buildMap();
+    animate();
+  }
+
+  /* ---------- controls (scoped: only act while overlay open) ---------- */
+  function bindControls() {
+    addEventListener('keydown', e => {
+      if (!isOpen()) return;
+      const k = e.key.toLowerCase();
+      keys[k] = true;
+      if (['arrowup','arrowdown','arrowleft','arrowright',' '].includes(k)) e.preventDefault();
+      if (k === 'm' && state.entered) toggleMap();
+    });
+    addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
+
+    let dragging = false, lx = 0, ly = 0;
+    overlay.addEventListener('mousedown', e => {
+      if (!state.entered) return;
+      dragging = true; lx = e.clientX; ly = e.clientY;
+    });
+    addEventListener('mouseup', () => dragging = false);
+    addEventListener('mousemove', e => {
+      if (!dragging || !isOpen()) return;
+      state.yaw -= (e.clientX - lx) * 0.004;
+      state.pitch = Math.min(1.1, Math.max(0.08, state.pitch + (e.clientY - ly) * 0.003));
+      lx = e.clientX; ly = e.clientY;
+    });
+    overlay.addEventListener('touchstart', e => { if (e.touches[0]) { lx = e.touches[0].clientX; ly = e.touches[0].clientY; } }, { passive: true });
+    overlay.addEventListener('touchmove', e => {
+      if (!e.touches[0] || !state.entered) return;
+      state.yaw -= (e.touches[0].clientX - lx) * 0.005;
+      keys['w'] = true;
+      lx = e.touches[0].clientX; ly = e.touches[0].clientY;
+    }, { passive: true });
+    overlay.addEventListener('touchend', () => { keys['w'] = false; });
+
+    addEventListener('resize', () => {
+      if (!initialized) return;
+      camera.aspect = innerWidth / innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+    });
+  }
+
+  /* ---------- unlock toast ---------- */
+  const unlockEl = document.getElementById('unlock');
+  let toastTimer = null;
+  function showUnlock(b) {
+    document.getElementById('u-kind').textContent = '◈ UNLOCKED · ' + b.kind;
+    document.getElementById('u-title').textContent = b.title;
+    document.getElementById('u-desc').textContent = b.desc;
+    const link = document.getElementById('u-link');
+    if (b.link) { link.href = b.link; link.hidden = false; } else link.hidden = true;
+    unlockEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => unlockEl.classList.remove('show'), 6000);
+  }
+
+  /* ---------- map ---------- */
+  const mapWrap = document.getElementById('map-wrap');
+  function buildMap() {
+    const mapGrid = document.getElementById('map-grid');
+    BEACONS.forEach((b, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'map-item';
+      btn.id = 'map-item-' + i;
+      btn.textContent = (i + 1 < 10 ? '0' : '') + (i + 1) + ' · ' + b.title;
+      btn.addEventListener('click', () => {
+        state.x = b.pos[0] + 3; state.z = b.pos[2] + 3;
+        closeMap();
+      });
+      mapGrid.appendChild(btn);
+    });
+    document.getElementById('map-btn').addEventListener('click', toggleMap);
+    document.getElementById('map-close').addEventListener('click', closeMap);
+    mapWrap.addEventListener('click', e => { if (e.target === mapWrap) closeMap(); });
+  }
+  function toggleMap() { mapWrap.hidden = !mapWrap.hidden; }
+  function closeMap() { mapWrap.hidden = true; }
+  function mapOpen() { return !mapWrap.hidden; }
+
+  /* ---------- loop ---------- */
+  function animate() {
+    if (running) requestAnimationFrame(animate);
+    if (!running) return;
+    const dt = Math.min(clock.getDelta(), 0.05);
+    const t = clock.getElapsedTime();
+
+    if (state.entered) {
+      const run = keys['shift'] ? 2 : 1;
+      const sp = 9 * run;
+      let fx = 0, fz = 0;
+      if (keys['w'] || keys['arrowup']) { fx += Math.sin(state.yaw); fz += Math.cos(state.yaw); }
+      if (keys['s'] || keys['arrowdown']) { fx -= Math.sin(state.yaw); fz -= Math.cos(state.yaw); }
+      if (keys['a'] || keys['arrowleft']) { fx += Math.cos(state.yaw); fz -= Math.sin(state.yaw); }
+      if (keys['d'] || keys['arrowright']) { fx -= Math.cos(state.yaw); fz += Math.sin(state.yaw); }
+      const len = Math.hypot(fx, fz) || 1;
+      state.vx += (fx / len * sp - state.vx) * 0.12;
+      state.vz += (fz / len * sp - state.vz) * 0.12;
+      state.x -= state.vx * dt;
+      state.z -= state.vz * dt;
+      state.x = Math.max(-160, Math.min(160, state.x));
+      state.z = Math.max(-160, Math.min(160, state.z));
+
+      if (Math.hypot(state.vx, state.vz) > 0.4) {
+        player.rotation.y = Math.atan2(-state.vx, -state.vz);
+        player.position.y = Math.abs(Math.sin(t * 9)) * 0.12;
+      } else {
+        player.position.y = Math.sin(t * 2) * 0.03;
+      }
+    }
+
+    player.position.x = state.x;
+    player.position.z = state.z;
+
+    const camDist = 9, camH = 3.5 + state.pitch * 6;
+    camera.position.x += (state.x + Math.sin(state.yaw) * camDist - camera.position.x) * 0.08;
+    camera.position.z += (state.z + Math.cos(state.yaw) * camDist - camera.position.z) * 0.08;
+    camera.position.y += (camH - camera.position.y) * 0.08;
+    camera.lookAt(state.x, 1.4, state.z);
+
+    beaconMeshes.forEach(b => {
+      b.core.rotation.y = t * 0.8 + b.idx;
+      b.core.position.y = 1.6 + Math.sin(t * 1.5 + b.idx) * 0.25;
+      const s = 1 + Math.sin(t * 2 + b.idx) * 0.12;
+      b.ring.scale.set(s, s, 1);
+      const d = Math.hypot(state.x - b.group.position.x, state.z - b.group.position.z);
+      if (state.entered && d < 3 && !found.has(b.idx)) {
+        found.add(b.idx);
+        b.core.material.emissive.setHex(0xf5c518);
+        b.pillar.material.color.setHex(0xf5c518);
+        b.light.color.setHex(0xf5c518);
+        document.getElementById('found-count').textContent = found.size;
+        const mi = document.getElementById('map-item-' + b.idx);
+        if (mi) mi.classList.add('found');
+        showUnlock(b.data);
+      }
+    });
+
+    renderer.render(scene, camera);
+  }
+
+  /* ---------- public api ---------- */
+  function open() {
+    overlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+    init();
+    if (!running) { running = true; clock.getDelta(); animate(); }
+  }
+  function close() {
+    if (mapOpen()) { closeMap(); return; }
+    overlay.hidden = true;
+    running = false;
+    document.body.style.overflow = '';
+  }
+  function isOpen() { return !overlay.hidden; }
+
+  // wire enter + exit buttons
+  document.getElementById('enter-btn').addEventListener('click', () => {
+    document.getElementById('intro-wrap').classList.add('hide');
+    state.entered = true;
+  });
+  document.getElementById('world-exit').addEventListener('click', close);
+
+  return { open, close, isOpen };
+})();
+
+</script>
+<script>
+/* ==========================================================
+   main.js — nav, reveals, typewriter, clock, likes, chat,
+   terminal & WORLD52 overlay wiring (single-page site)
+   ========================================================== */
+(function () {
+
+  /* ---------- scroll-spy nav ---------- */
+  const links = document.querySelectorAll('.nav-link[data-section]');
+  const sections = [...links].map(l => document.getElementById(l.dataset.section)).filter(Boolean);
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.toggle('active', l.dataset.section === e.target.id));
+      }
+    });
+  }, { threshold: 0.35 });
+  sections.forEach(s => spy.observe(s));
+
+  /* ---------- scroll reveal ---------- */
+  const revealer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealer.observe(el));
+
+  /* ---------- typewriter ---------- */
+  const LINES = [
+    "i'm farbot, the resident ai. i translate his work.",
+    "he ships ai that watches, reads, and schedules.",
+    "sih grand finalist. 6+ projects. 1 live client.",
+    "ask me anything — i keep the archive."
+  ];
+  const typer = document.getElementById('typer');
+  if (typer) {
+    let li = 0, ci = 0, deleting = false;
+    function tick() {
+      const line = LINES[li];
+      if (!deleting) {
+        ci++;
+        if (ci === line.length) { deleting = true; setTimeout(tick, 2600); render(); return; }
+      } else {
+        ci--;
+        if (ci === 0) { deleting = false; li = (li + 1) % LINES.length; }
+      }
+      render();
+      setTimeout(tick, deleting ? 18 : 42);
+    }
+    function render() {
+      typer.innerHTML = LINES[li].slice(0, ci) + '<span class="caret">▌</span>';
+    }
+    setTimeout(tick, 1200);
+  }
+
+  /* ---------- IST clock ---------- */
+  function updateClock() {
+    const t = new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' });
+    const el1 = document.getElementById('ist-time');
+    const el2 = document.getElementById('ist-time-2');
+    if (el1) el1.textContent = t;
+    if (el2) el2.textContent = t + ' IST';
+  }
+  updateClock(); setInterval(updateClock, 30000);
+
+  /* ---------- likes (L key) ---------- */
+  let likes = 0;
+  const likeEl = document.getElementById('like-count');
+  const likeHint = document.querySelector('.like-hint');
+  function like() {
+    likes++;
+    if (likeEl) likeEl.textContent = '♥ ' + likes;
+    burst();
+  }
+  function burst() {
+    const h = document.createElement('div');
+    h.textContent = '♥';
+    h.style.cssText = 'position:fixed;left:' + (100 + Math.random() * 120) + 'px;bottom:60px;z-index:99;font-size:22px;color:#14b8a6;pointer-events:none;transition:all 1.1s ease-out;';
+    document.body.appendChild(h);
+    requestAnimationFrame(() => { h.style.transform = 'translateY(-140px) rotate(' + (Math.random() * 40 - 20) + 'deg)'; h.style.opacity = '0'; });
+    setTimeout(() => h.remove(), 1200);
+  }
+  if (likeHint) likeHint.addEventListener('click', like);
+
+  /* ---------- WORLD52 overlay ---------- */
+  const worldOpen = () => window.WORLD52 && window.WORLD52.open();
+  document.getElementById('open-world').addEventListener('click', worldOpen);
+  const ow2 = document.getElementById('open-world-2');
+  if (ow2) ow2.addEventListener('click', worldOpen);
+
+  /* ---------- chat ---------- */
+  const chatOverlay = document.getElementById('chat-overlay');
+  const chatLog = document.getElementById('chat-log');
+  const chatForm = document.getElementById('chat-form');
+  const chatInput = document.getElementById('chat-input');
+
+  function openChat(seedQuestion) {
+    chatOverlay.hidden = false;
+    if (!chatLog.childElementCount) {
+      addMsg('bot', "Back from the work — I saw you looking. What brings you here?");
+    }
+    if (seedQuestion) ask(seedQuestion);
+    chatInput.focus();
+  }
+  function closeChat() { chatOverlay.hidden = true; }
+
+  function addMsg(who, text) {
+    const d = document.createElement('div');
+    d.className = 'msg ' + who;
+    d.textContent = text;
+    chatLog.appendChild(d);
+    chatLog.scrollTop = chatLog.scrollHeight;
+    return d;
+  }
+  function ask(q) {
+    addMsg('user', q);
+    const th = addMsg('bot', '…');
+    setTimeout(() => {
+      th.textContent = window.FARBOT.answer(q);
+      chatLog.scrollTop = chatLog.scrollHeight;
+    }, 450 + Math.random() * 500);
+  }
+
+  document.getElementById('open-chat').addEventListener('click', () => openChat());
+  document.getElementById('close-chat').addEventListener('click', closeChat);
+  chatOverlay.addEventListener('click', e => { if (e.target === chatOverlay) closeChat(); });
+  chatForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const q = chatInput.value.trim();
+    if (!q) return;
+    chatInput.value = '';
+    ask(q);
+  });
+  document.querySelectorAll('.ask-chip').forEach(c =>
+    c.addEventListener('click', () => openChat(c.dataset.q)));
+  document.querySelectorAll('.open-chat-opt').forEach(c =>
+    c.addEventListener('click', () => openChat(c.dataset.q)));
+
+  /* ---------- terminal ---------- */
+  const termOverlay = document.getElementById('term-overlay');
+  const termLog = document.getElementById('term-log');
+  const termForm = document.getElementById('term-form');
+  const termInput = document.getElementById('term-input');
+
+  function openTerm() {
+    termOverlay.hidden = false;
+    // focus after the browser finishes processing the click that opened it
+    setTimeout(() => termInput.focus(), 0);
+  }
+  function closeTerm() { termOverlay.hidden = true; }
+
+  document.getElementById('open-terminal-hint').addEventListener('click', openTerm);
+  document.getElementById('close-term').addEventListener('click', closeTerm);
+  termOverlay.addEventListener('click', e => { if (e.target === termOverlay) closeTerm(); });
+
+  // clicking anywhere inside the terminal keeps the prompt focused
+  document.getElementById('term-box').addEventListener('click', e => {
+    if (e.target.closest('.term-close')) return;
+    termInput.focus();
+  });
+  // if focus is ever lost while the terminal is open, typing any character re-routes to the prompt
+  addEventListener('keydown', e => {
+    if (termOverlay.hidden) return;
+    if (document.activeElement === termInput) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Enter') termInput.focus();
+  });
+
+  function tPrint(cls, text) {
+    const d = document.createElement('div');
+    d.className = cls;
+    d.textContent = text;
+    termLog.appendChild(d);
+    termLog.scrollTop = termLog.scrollHeight;
+    return d;
+  }
+
+  const COMMANDS = {
+    '/work':    () => { closeTerm(); location.hash = '#work'; },
+    '/resume':  () => { closeTerm(); location.hash = '#resume'; },
+    '/about':   () => { closeTerm(); location.hash = '#about'; },
+    '/contact': () => { closeTerm(); location.hash = '#contact'; },
+    '/world':   () => { closeTerm(); worldOpen(); },
+    '/idea52':  () => { closeTerm(); worldOpen(); },
+    '/cv':      () => { window.open('Farhan_Sargath_Resume.pdf', '_blank'); },
+    '/clear':   () => { termLog.innerHTML = ''; }
+  };
+
+  termForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const q = termInput.value.trim();
+    if (!q) return;
+    termInput.value = '';
+    tPrint('t-in', q);
+    const cmd = q.toLowerCase();
+    if (COMMANDS[cmd]) {
+      tPrint('t-out', '> ok. executing ' + cmd + ' …');
+      setTimeout(COMMANDS[cmd], 350);
+      return;
+    }
+    const proc = tPrint('t-proc', '> processing…');
+    setTimeout(() => {
+      proc.remove();
+      tPrint('t-out', window.FARBOT.answer(q));
+    }, 550 + Math.random() * 500);
+  });
+
+  /* ---------- global keys ---------- */
+  addEventListener('keydown', e => {
+    const typing = /INPUT|TEXTAREA/.test(document.activeElement.tagName);
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      termOverlay.hidden ? openTerm() : closeTerm();
+      return;
+    }
+    if (e.key === 'Escape') {
+      if (window.WORLD52 && window.WORLD52.isOpen()) { window.WORLD52.close(); return; }
+      closeChat(); closeTerm();
+      return;
+    }
+    if (typing) return;
+    if (!termOverlay.hidden || !chatOverlay.hidden) return; // overlays own the keys
+    if (window.WORLD52 && window.WORLD52.isOpen()) return;  // world uses its own keys
+    if (e.key.toLowerCase() === 'l') like();
+  });
+
+})();
+
+</script>
+</body>
+</html>
