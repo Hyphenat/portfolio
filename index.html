@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>farhan sargath. — builder · full-stack · ai/ml</title>
+<meta name="description" content="Portfolio of Farhan Sargath — Full-Stack Developer & AI/ML Engineer. Meet Farbot, the resident AI." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ============ FIXED ROBOT CANVAS (follows cursor) ============ -->
+<canvas id="robot-canvas" aria-hidden="true"></canvas>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="brand">
+    <a href="#home" class="brand-name">farhan sargath.</a>
+    <div class="brand-sub">BUILDER &nbsp;·&nbsp; FULL-STACK &nbsp;·&nbsp; AI / ML</div>
+  </div>
+  <nav class="pill-nav" id="pill-nav">
+    <button class="icon-btn" id="open-chat" title="Message Farbot" aria-label="Open chat">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    </button>
+    <a class="icon-btn" href="assets/Farhan_Sargath_Resume.pdf" download title="Download CV" aria-label="Download CV">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    </a>
+    <a href="#home" class="nav-link active" data-section="home">HOME</a>
+    <a href="#work" class="nav-link" data-section="work">WORK</a>
+    <button class="nav-link nav-world" id="open-world">WORLD52</button>
+    <a href="#resume" class="nav-link" data-section="resume">RESUME</a>
+    <a href="#about" class="nav-link" data-section="about">ABOUT</a>
+    <a href="#contact" class="nav-link" data-section="contact">CONTACT</a>
+  </nav>
+</header>
+
+<!-- ============ HOME ============ -->
+<section class="panel" id="home">
+  <div class="badge-float badge-yellow" title="Smart India Hackathon">
+    <svg viewBox="0 0 100 100"><path id="badge-circ" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0" fill="none"/><text><textPath href="#badge-circ">SMART INDIA HACKATHON · GRAND FINALIST ·</textPath></text></svg>
+    <span class="badge-core">SIH</span>
+  </div>
+
+  <h1 class="giant-word" aria-label="farbot.ai">farbot<span class="accent-dot">.ai</span></h1>
+
+  <div class="hero-hud">
+    <button class="hud-chip" id="open-world-2">WORLD52 ↗</button>
+    <div class="hud-note">HIS ARCHIVE, MADE WALKABLE</div>
+    <div class="hud-latest">LATEST <span class="accent">2026</span> — <a href="https://generalbrassind.com" target="_blank" rel="noopener">GENERALBRASSIND.COM →</a></div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="typer-label">FARBOT</div>
+    <div class="typer" id="typer">i'm farbot, the resident ai. i translate his work.<span class="caret">▌</span></div>
+    <div class="chips">
+      <button class="chip ask-chip" data-q="what has he built?">› what has he built?</button>
+      <button class="chip ask-chip" data-q="tell me about cognify">› tell me about cognify</button>
+      <button class="chip ask-chip" data-q="his biggest achievement?">› his biggest impact?</button>
+    </div>
+    <div class="like-hint">PRESS <kbd>L</kbd> TO LIKE OR CLICK HERE <span id="like-count"></span></div>
+  </div>
+</section>
+
+<!-- ============ WORK ============ -->
+<section class="panel" id="work">
+  <div class="panel-head reveal">
+    <div class="panel-no">02 / WORK</div>
+    <div class="panel-lede">Hackathon floors, client work and AI systems — serving <strong>real users</strong> — where I've been, and what I built.</div>
+  </div>
+
+  <aside class="career reveal">
+    <div class="col-label">CAREER <span class="col-count">04</span></div>
+    <ol class="timeline">
+      <li class="tl-item active">
+        <div class="tl-date">2026 — NOW</div>
+        <div class="tl-role">General Brass Industries</div>
+        <div class="tl-sub">Full-Stack Developer (Freelance · Live Client Site)</div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-date">2025 — 2026</div>
+        <div class="tl-role">AI / ML Systems</div>
+        <div class="tl-sub">Cognify · Court Summarizer · CompareKart</div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-date">2025 — 2026</div>
+        <div class="tl-role">Hackathon Circuit</div>
+        <div class="tl-sub">SIH Grand Finalist · Intellify 4.0 · Project Morpheus</div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-date">2022 — 2026</div>
+        <div class="tl-role">Marwadi University</div>
+        <div class="tl-sub">B.Tech — Computer Science Engineering</div>
+      </li>
+    </ol>
+  </aside>
+
+  <aside class="worklist reveal">
+    <div class="col-label">SELECTED WORK <span class="col-count">07</span></div>
+    <div class="work-cards">
+
+      <a class="work-card" href="https://github.com/Hyphenat/Cognify-Classroom-Engagement-Analysis" target="_blank" rel="noopener">
+        <div class="wc-thumb wc-t1">◨</div>
+        <div class="wc-body">
+          <div class="wc-meta"><span>01 · AI PRODUCT</span><span class="wc-flag">FLAGSHIP</span></div>
+          <div class="wc-title">Cognify — EngageAI</div>
+          <div class="wc-desc">Turns ordinary webcams into engagement sensors — real-time classroom attention scoring with PyTorch vision, live dashboards…</div>
+          <div class="wc-tags"><span>COMPUTER VISION</span><span>REACT + FASTAPI</span></div>
+        </div>
+      </a>
+
+      <a class="work-card" href="https://github.com/Hyphenat/Court-Summarizer" target="_blank" rel="noopener">
+        <div class="wc-thumb wc-t2">§</div>
+        <div class="wc-body">
+          <div class="wc-meta"><span>02 · LEGAL TECH</span><span class="wc-flag">NLP</span></div>
+          <div class="wc-title">Court Summarizer</div>
+          <div class="wc-desc">Full-stack platform that reads lengthy judgments and surfaces parties, judges, citations and summaries — hours of review to seconds…</div>
+          <div class="wc-tags"><span>NLP · TRANSFORMERS</span><span>FASTAPI + MONGODB</span></div>
+        </div>
+      </a>
+
+      <a class="work-card" href="https://generalbrassind.com" target="_blank" rel="noopener">
+        <div class="wc-thumb wc-t3">⌂</div>
+        <div class="wc-body">
+          <div class="wc-meta"><span>03 · CLIENT</span><span class="wc-flag">LIVE</span></div>
+          <div class="wc-title">General Brass Industries</div>
+          <div class="wc-desc">A manufacturer that relied on referrals now reaches buyers beyond local markets — deployed business site for a brass components maker…</div>
+          <div class="wc-tags"><span>FULL-STACK</span><span>DEPLOYED 2026</span></div>
+        </div>
+      </a>
+
+      <a class="work-card" href="https://github.com/Hyphenat/Automated-Timetable-Generator-----Schedulify" target="_blank" rel="noopener">
+        <div class="wc-thumb wc-t4">▦</div>
+        <div class="wc-body">
+          <div class="wc-meta"><span>04 · AUTOMATION</span><span class="wc-flag">SCHEDULING</span></div>
+          <div class="wc-title">Schedulify</div>
+          <div class="wc-desc">Conflict-free college timetables in minutes — no double-booked faculty, no clashing rooms, full generation history…</div>
+          <div class="wc-tags"><span>PYTHON ALGORITHMS</span><span>REACT + VITE</span></div>
+        </div>
+      </a>
+
+      <a class="work-card" href="https://github.com/Hyphenat" target="_blank" rel="noopener">
+        <div class="wc-thumb wc-t5">↯</div>
+        <div class="wc-body">
+          <div class="wc-meta"><span>05 · ML / E-COMMERCE</span><span class="wc-flag">PREDICTION</span></div>
+          <div class="wc-title">CompareKart</div>
+          <div class="wc-desc">Buy now or wait? Analyzes historical price patterns with Random Forest models and predicts where prices go next…</div>
+          <div class="wc-tags"><span>SCIKIT-LEARN</span><span>REACT.JS</span></div>
+        </div>
+      </a>
+
+      <a class="work-card" href="https://github.com/Hyphenat/Employee-Management-System" target="_blank" rel="noopener">
+        <div class="wc-thumb wc-t6">▤</div>
+        <div class="wc-body">
+          <div class="wc-meta"><span>06 · ENTERPRISE</span><span class="wc-flag">.NET</span></div>
+          <div class="wc-title">Employee Management System</div>
+          <div class="wc-desc">Employee records, departments, roles and HR workflows from one organized dashboard — built on C# and .NET…</div>
+          <div class="wc-tags"><span>C# · .NET</span><span>SQL</span></div>
+        </div>
+      </a>
+
+      <a class="work-card" href="https://github.com/Hyphenat" target="_blank" rel="noopener">
+        <div class="wc-thumb wc-t7">₹</div>
+        <div class="wc-body">
+          <div class="wc-meta"><span>07 · FINTECH</span><span class="wc-flag">PAYROLL</span></div>
+          <div class="wc-title">Payroll Management System</div>
+          <div class="wc-desc">Salary processing, tax calculation and reporting automated end-to-end — because payroll errors cost trust, not just time…</div>
+          <div class="wc-tags"><span>C# (.NET) · SQL</span><span>DBMS</span></div>
+        </div>
+      </a>
+
+    </div>
+  </aside>
+</section>
+
+<!-- ============ RESUME ============ -->
+<section class="panel" id="resume">
+  <div class="panel-head reveal">
+    <div class="panel-no">03 / RESUME</div>
+    <div class="panel-lede">The paper trail — education, capabilities and proof, in one place. <strong>Or grab the PDF.</strong></div>
+  </div>
+
+  <div class="resume-grid">
+    <div class="resume-left reveal">
+      <div class="r-card">
+        <div class="card-label">EDUCATION</div>
+        <div class="edu-date">2022 — 2026</div>
+        <div class="edu-name">Marwadi University, Rajkot</div>
+        <div class="edu-sub">B.Tech — Computer Science Engineering</div>
+      </div>
+
+      <div class="r-card">
+        <div class="card-label">CERTIFICATES · CISCO NETWORKING ACADEMY</div>
+        <div class="cert-row"><span>CCNA: Introduction to Networks</span><span>FEB 2025</span></div>
+        <div class="cert-row"><span>CCNA: Switching, Routing &amp; Wireless</span><span>MAR 2025</span></div>
+        <div class="cert-row"><span>Linux Essentials</span><span>APR 2025</span></div>
+        <div class="cert-row"><span>Cisco Packet Tracer</span><span>JUN 2025</span></div>
+        <div class="cert-row"><span>Introduction to Cybersecurity</span><span>NOV 2025</span></div>
+      </div>
+
+      <div class="r-card">
+        <div class="card-label">RESEARCH · IN PIPELINE</div>
+        <div class="paper-row">Classroom Engagement Analytics Using Real-Time Vision Inference &amp; Learning-Aware Dashboarding</div>
+        <div class="paper-row">Multi-Strategy Text Preprocessing for Improved Abstractive Summarization of Legal Documents</div>
+      </div>
+    </div>
+
+    <div class="resume-right reveal">
+      <div class="r-card">
+        <div class="card-label">SKILLS</div>
+        <div class="skills-wrap">
+          <span class="skill">Python</span><span class="skill">PyTorch</span><span class="skill">OpenCV</span>
+          <span class="skill">Computer Vision</span><span class="skill">NLP · spaCy</span><span class="skill">scikit-learn</span>
+          <span class="skill">React.js</span><span class="skill">FastAPI</span><span class="skill">Node.js</span>
+          <span class="skill">Flask</span><span class="skill">REST APIs</span><span class="skill">C# (.NET)</span>
+          <span class="skill">Java</span><span class="skill">SQL · MySQL</span><span class="skill">MongoDB</span>
+          <span class="skill">Pandas · NumPy</span><span class="skill">Power BI</span><span class="skill">KPI Analysis</span>
+          <span class="skill">Git · GitHub</span><span class="skill">Cisco Networking</span>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num">6+</div><div class="stat-cap">PROJECTS SHIPPED</div></div>
+        <div class="stat-card"><div class="stat-num">3</div><div class="stat-cap">HACKATHON FINALS</div></div>
+        <div class="stat-card"><div class="stat-num">5</div><div class="stat-cap">CISCO CERTS</div></div>
+        <div class="stat-card"><div class="stat-num">2</div><div class="stat-cap">PAPERS IN PIPELINE</div></div>
+      </div>
+
+      <a class="cv-big-btn" href="assets/Farhan_Sargath_Resume.pdf" download>Download CV — PDF ⤓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="panel" id="about">
+  <div class="panel-head reveal">
+    <div class="panel-no">04 / ABOUT</div>
+    <div class="panel-lede">The human behind the systems — turning messy, real-world problems into software people actually <strong>use</strong>.</div>
+  </div>
+
+  <div class="badge-cluster reveal" aria-hidden="true">
+    <div class="mini-badge mb-dark">SIH<br>FINALIST</div>
+    <div class="mini-badge mb-purple">INTELLIFY<br>4.0</div>
+    <div class="mini-badge mb-yellow">MORPHEUS<br>2026</div>
+    <div class="mini-badge mb-red">CCNA<br>×2</div>
+    <div class="mini-badge mb-green">LINUX<br>ESSENTIALS</div>
+  </div>
+
+  <div class="about-col reveal">
+    <h2 class="about-name">Farhan Sargath<span class="accent-dot">.</span></h2>
+    <div class="about-roles">BUILDER · FULL-STACK DEVELOPER · AI/ML ENGINEER</div>
+    <p class="about-intro">I'm Farbot — the AI Farhan built to keep his archive and talk to whoever wanders in. He's a full-stack developer and AI/ML engineer from Rajkot, a Smart India Hackathon Grand Finalist, and he ships things that real people use. Most of what I know, I learned from watching him work.</p>
+
+    <div class="manifesto">
+      <div class="mani-label">MANIFESTO</div>
+      <p>When he isn't training vision models or untangling legal documents with NLP, he's rebuilding boring, manual processes — timetables, payroll, paperwork — into systems that run themselves. I'm what that obsession looks like once it learns to talk.</p>
+    </div>
+
+    <div class="about-foot">
+      FULL-STACK · AI/ML · REAL USERS<br>© 2026 FARHAN SARGATH · RAJKOT, IN
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="panel" id="contact">
+  <div class="panel-head reveal">
+    <div class="panel-no">05 / CONTACT</div>
+    <div class="panel-lede">Open to internships, freelance and full-time roles — tell me what you're building, and you'll hear back <strong>within ~6 hours.</strong></div>
+  </div>
+
+  <div class="contact-left reveal">
+    <div class="findme-card">
+      <div class="card-label">FIND ME</div>
+      <a class="find-row" href="mailto:fsargath@gmail.com">
+        <span class="find-ic">✉</span>
+        <span class="find-txt"><strong>Email</strong><em>fsargath@gmail.com</em></span>
+        <span class="find-arrow">↗</span>
+      </a>
+      <a class="find-row" href="tel:+918849657513">
+        <span class="find-ic">✆</span>
+        <span class="find-txt"><strong>Phone</strong><em>+91 88496 57513</em></span>
+        <span class="find-arrow">↗</span>
+      </a>
+      <a class="find-row" href="https://github.com/Hyphenat" target="_blank" rel="noopener">
+        <span class="find-ic">⌥</span>
+        <span class="find-txt"><strong>GitHub</strong><em>github.com/Hyphenat</em></span>
+        <span class="find-arrow">↗</span>
+      </a>
+      <a class="find-row" href="https://www.linkedin.com/in/farhan-sargath" target="_blank" rel="noopener">
+        <span class="find-ic">in</span>
+        <span class="find-txt"><strong>LinkedIn</strong><em>linkedin.com/in/farhan-sargath</em></span>
+        <span class="find-arrow">↗</span>
+      </a>
+    </div>
+
+    <div class="profile-card">
+      <div class="profile-top">
+        <div class="avatar">FS</div>
+        <div>
+          <div class="profile-name">Farhan Sargath</div>
+          <div class="profile-role">FULL-STACK · AI/ML · RAJKOT</div>
+        </div>
+      </div>
+      <div class="status-pill"><span class="dot"></span> Open to work <span class="status-time" id="ist-time-2"></span></div>
+      <div class="card-label" style="margin-top:16px">WHAT I'M GOOD FOR</div>
+      <div class="good-row"><span class="good-tag">AI</span> Vision &amp; NLP systems that ship, not just demo</div>
+      <div class="good-row"><span class="good-tag">FS</span> Full-stack builds — React / FastAPI / Node / .NET</div>
+      <div class="good-row"><span class="good-tag">DA</span> Dashboards, KPI analysis &amp; business reporting</div>
+      <div class="card-label" style="margin-top:16px">WHERE</div>
+      <div class="where-row"><strong>Rajkot, India</strong><span class="where-time" id="ist-time">—</span></div>
+      <div class="where-sub">INDIA STANDARD TIME · ASYNC OK · HIS LOCAL TIME</div>
+    </div>
+  </div>
+
+  <div class="contact-right reveal">
+    <div class="msg-card">
+      <div class="msg-head">
+        <span class="msg-ic">💬</span>
+        <div>
+          <div class="msg-title">Message Farbot</div>
+          <div class="msg-sub">FARHAN'S ASSISTANT · REPLIES IN ~6H</div>
+        </div>
+      </div>
+      <div class="msg-bubble">Back from the work — I saw you looking. What brings you here?</div>
+      <button class="msg-opt open-chat-opt" data-q="i want to hire him">
+        <span class="opt-ic">💼</span><span class="opt-txt"><strong>Hire me</strong><em>Full-time, internship or contract role</em></span><span class="opt-arr">→</span>
+      </button>
+      <button class="msg-opt open-chat-opt" data-q="i have a project">
+        <span class="opt-ic">✦</span><span class="opt-txt"><strong>A project</strong><em>Freelance — build or revamp</em></span><span class="opt-arr">→</span>
+      </button>
+      <button class="msg-opt open-chat-opt" data-q="hi">
+        <span class="opt-ic">🗨</span><span class="opt-txt"><strong>Just say hi</strong><em>Anything else on your mind</em></span><span class="opt-arr">→</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TICKER ============ -->
+<footer class="ticker">
+  <div class="ticker-static">STACK OF <strong>20+</strong> TOOLS</div>
+  <div class="ticker-track" id="ticker-track">
+    <span>PYTHON</span><span>·</span><span>PYTORCH</span><span>·</span><span>OPENCV</span><span>·</span><span>REACT.JS</span><span>·</span><span>FASTAPI</span><span>·</span><span>NODE.JS</span><span>·</span><span>SPACY</span><span>·</span><span>SCIKIT-LEARN</span><span>·</span><span>C# .NET</span><span>·</span><span>SQL</span><span>·</span><span>MONGODB</span><span>·</span><span>POWER BI</span><span>·</span><span>PANDAS</span><span>·</span><span>FLASK</span><span>·</span><span>GIT</span><span>·</span><span>CISCO CCNA</span><span>·</span>
+  </div>
+  <div class="ticker-search" id="open-terminal-hint">Terminal &nbsp;<kbd>⌘K</kbd></div>
+</footer>
+
+<!-- ============ CHAT OVERLAY ============ -->
+<div class="overlay" id="chat-overlay" hidden>
+  <div class="chat-box">
+    <div class="chat-head">
+      <div><div class="chat-title">Farbot</div><div class="chat-sub">RESIDENT AI · KNOWS THE ARCHIVE</div></div>
+      <button class="close-x" id="close-chat">✕</button>
+    </div>
+    <div class="chat-log" id="chat-log"></div>
+    <div class="chat-chips" id="chat-chips">
+      <button class="chip ask-chip" data-q="what has he built?">projects</button>
+      <button class="chip ask-chip" data-q="what are his skills?">skills</button>
+      <button class="chip ask-chip" data-q="achievements?">achievements</button>
+      <button class="chip ask-chip" data-q="how do i contact him?">contact</button>
+    </div>
+    <form class="chat-input-row" id="chat-form">
+      <input type="text" id="chat-input" placeholder="ask me anything about farhan…" autocomplete="off" />
+      <button type="submit">↑</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ TERMINAL OVERLAY ============ -->
+<div class="overlay" id="term-overlay" hidden>
+  <div class="term-box" id="term-box">
+    <div class="term-side">FARBOT_AI · TERMINAL <span class="term-live">● LIVE</span></div>
+    <div class="term-main">
+      <div class="term-head-row">
+        <span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span>
+        <button class="close-x term-close" id="close-term">✕</button>
+      </div>
+      <div class="term-banner">farbot_ai v1.0 · cognition_layer online<br>type a question, or one of: <span class="accent">/work /world /resume /about /contact /cv /clear</span></div>
+      <div class="term-comment">// hello. ask me anything about farhan.</div>
+      <div class="term-log" id="term-log"></div>
+      <form id="term-form" class="term-input-row">
+        <span class="term-ps">$ guest@farbot:~ $</span>
+        <input type="text" id="term-input" autocomplete="off" spellcheck="false" />
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ============ WORLD52 OVERLAY (in-page 3D world) ============ -->
+<div class="world-overlay" id="world-overlay" hidden>
+  <canvas id="world"></canvas>
+
+  <div class="w-header">
+    <div class="w-brand">WORLD<span>52</span><small>EVERYTHING HE'S SHIPPED, MADE WALKABLE</small></div>
+    <button class="hud-btn w-exit" id="world-exit">EXIT ↩ &nbsp;<kbd>ESC</kbd></button>
+  </div>
+
+  <div class="intro-wrap" id="intro-wrap">
+    <div class="intro">
+      <h1>WORLD<span>52</span></h1>
+      <div class="sub">EVERYTHING HE'S SHIPPED, MADE WALKABLE</div>
+      <p class="desc"><b>projects, hackathon finals &amp; certifications</b> — scattered across<br>this world as beacons. farhan's archive — a world, not a test.</p>
+      <hr>
+      <div class="cols">
+        <div class="col">
+          <h3>CONTROLS</h3>
+          <div class="krow"><span class="key">WASD / ↑↓←→</span> move</div>
+          <div class="krow"><span class="key">SHIFT</span> run — or just keep going</div>
+          <div class="krow"><span class="key">DRAG</span> look around</div>
+          <div class="krow"><span class="key">M</span> fast-travel to any beacon</div>
+        </div>
+        <div class="vline"></div>
+        <div class="col">
+          <h3 class="c">THE GOAL</h3>
+          <p class="goal">walk up to a beacon to unlock it. find all twelve — or just roam. every light out there is something he actually built or won.</p>
+        </div>
+      </div>
+      <button class="enter" id="enter-btn">ENTER WORLD ——</button>
+    </div>
+  </div>
+
+  <div class="w-hud">FOUND <b id="found-count">0</b> / <b>12</b> &nbsp;·&nbsp; WASD MOVE · SHIFT RUN · DRAG LOOK</div>
+  <div class="w-hud-right">
+    <button class="hud-btn" id="map-btn">MAP [M]</button>
+  </div>
+
+  <div class="unlock" id="unlock">
+    <div class="u-kind" id="u-kind"></div>
+    <div class="u-title" id="u-title"></div>
+    <div class="u-desc" id="u-desc"></div>
+    <a class="u-link" id="u-link" target="_blank" rel="noopener" hidden>OPEN ↗</a>
+  </div>
+
+  <div class="map-wrap" id="map-wrap" hidden>
+    <div class="map-card">
+      <h2>FAST-TRAVEL — PICK A BEACON</h2>
+      <div class="map-grid" id="map-grid"></div>
+      <button class="hud-btn map-close" id="map-close">CLOSE [ESC]</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/farbot-brain.js"></script>
+<script src="js/robot.js"></script>
+<script src="js/world.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
